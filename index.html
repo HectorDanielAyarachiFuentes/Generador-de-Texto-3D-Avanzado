@@ -5,17 +5,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generador de Texto 3D Avanzado</title>
+    <!-- Font Awesome para los íconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="icon" type="image/svg+xml"href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGOERCMjgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM5MDFGMDYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2EpIiBkPSJNOTYgMzg0aDMyMGwtMzItMjU2SDEyOEw5NiAzODR6TTI1NiA2NGMxNy43IDAgMzIgMTQuMyAzMiAzMnYzMmgtNjRWOTZjMC0xNy43IDE0LjMtMzIgMzItMzJ6TTY0IDQxNmMwIDE3LjcgMTQuMyAzMiAzMiAzMmgzMjBjMTcuNyAwIDMyLTE0LjMgMzItMzJWMzg0SDY0djMyeiIvPjxwYXRoIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iLjMiIGQ9Ik05NiAzODRsMzItMjU2aDI1NmwtMzIgMjU2SDk2eiIvPjx0ZXh0IHg9IjI1NiIgeT0iMjgwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+M0Q8L3RleHQ+PC9zdmc+">
+    <!-- Favicon SVG -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGOERCMjgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM5MDFGMDYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2EpIiBkPSJNOTYgMzg0aDMyMGwtMzItMjU2SDEyOEw5NiAzODR6TTI1NiA2NGMxNy43IDAgMzIgMTQuMyAzMiAzMnYzMmgtNjRWOTZjMC0xNy43IDE0LjMtMzIgMzItMzJ6TTY0IDQxNmMwIDE3LjcgMTQuMyAzMiAzMiAzMmgzMjBjMTcuNyAwIDMyLTE0LjMgMzItMzJWMzg0SDY0djMyeiIvPjxwYXRoIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iLjMiIGQ9Ik05NiAzODRsMzItMjU2aDI1NmwtMzIgMjU2SDk2eiIvPjx0ZXh0IHg9IjI1NiIgeT0iMjgwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+M0Q8L3RleHQ+PC9zdmc+">
+    <!-- Enlace a tu archivo CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+    <!-- Contenedor para las partículas (necesitará JS para generarlas) -->
     <div class="particles" id="particles"></div>
 
+    <!-- Contenedor principal de la aplicación -->
     <main class="container">
+        <!-- Sección de Controles -->
         <section class="controls-container">
+            <!-- Formulario de Controles -->
             <form id="controls-form" onsubmit="return false;">
+                <!-- Fieldset: Texto y Estilo -->
                 <fieldset>
                     <legend><i class="fas fa-font"></i> Texto y Estilo</legend>
                     <div class="control-group text-input">
@@ -68,6 +76,7 @@
                     </div>
                 </fieldset>
 
+                <!-- Fieldset: Sombra -->
                 <fieldset>
                     <legend><i class="fas fa-shadow"></i> Sombra</legend>
                     <div class="control-group">
@@ -112,6 +121,7 @@
                     </div>
                 </fieldset>
 
+                <!-- Fieldset: Efecto 3D -->
                 <fieldset>
                     <legend><i class="fas fa-cube"></i> Efecto 3D</legend>
                     <div class="control-group">
@@ -144,6 +154,7 @@
                     </div>
                 </fieldset>
 
+                <!-- Fieldset: Efectos Especiales -->
                 <fieldset>
                     <legend><i class="fas fa-magic"></i> Efectos Especiales</legend>
                     <div class="control-group switch-group">
@@ -175,6 +186,7 @@
                     </div>
                 </fieldset>
 
+                <!-- Fieldset: Preajustes Rápidos -->
                 <fieldset>
                     <legend><i class="fas fa-sliders-h"></i> Preajustes Rápidos</legend>
                     <div class="preset-buttons">
@@ -189,6 +201,8 @@
                     </div>
                 </fieldset>
             </form>
+
+            <!-- Botones de Acción -->
             <div class="actions">
                 <button id="copy-css-button"><i class="fas fa-copy"></i> Copiar HTML Completo</button>
                 <button id="reset-button"><i class="fas fa-redo"></i> Restablecer Configuración</button>
@@ -196,7 +210,9 @@
             </div>
         </section>
 
+        <!-- Sección de Demostración -->
         <section class="demo-container" id="demo-container">
+            <!-- Selectores de Fondo -->
             <div class="background-selector">
                 <div class="bg-btn active" style="background: linear-gradient(135deg, #1a1a2e, #2c3e50);"
                     data-bg="linear-gradient(135deg, #1a1a2e, #2c3e50)"></div>
@@ -207,12 +223,15 @@
                 <div class="bg-btn" style="background: linear-gradient(135deg, #000000, #434343);"
                     data-bg="linear-gradient(135deg, #000000, #434343)"></div>
             </div>
+            <!-- El texto 3D -->
             <div class="text-demo">
                 <h1 id="vanish-shadow"></h1>
             </div>
         </section>
     </main>
 
+    <!-- Enlace al script de JavaScript -->
+    <!-- Es crucial que este script se cargue después de que el DOM esté listo -->
     <script type="module" src="script.js"></script>
 </body>
 
