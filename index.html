@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Texto y Estilo</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Texto 3D Avanzado</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+
+    <main class="container">
+        <section class="controls-container">
+            <form id="controls-form" onsubmit="return false;">
+                <fieldset>
+                    <legend><i class="fas fa-font"></i> Texto y Estilo</legend>
+                    <div class="control-group text-input">
+                        <label for="title-text">
+                            <span><i class="fas fa-pencil-alt"></i> Texto</span>
+                        </label>
+                        <input type="text" id="title-text" name="text" value="3D Impresionante">
+                    </div>
+                    
+                    <div class="control-group switch-group">
+                        <label for="rainbow-toggle">
+                            <span><i class="fas fa-rainbow"></i> Color Arcoíris</span>
+                            <div class="switch">
+                                <input type="checkbox" id="rainbow-toggle" name="rainbowMode">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="text-color">
+                            <span><i class="fas fa-fill-drip"></i> Color de Texto</span>
+                        </label>
+                        <input type="color" id="text-color" name="textColor" value="#F8DB28">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="outline-color">
+                            <span><i class="fas fa-brush"></i> Color de Borde</span>
+                        </label>
+                        <input type="color" id="outline-color" name="outlineColor" value="#901F06">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="letter-spacing">
+                            <span><i class="fas fa-text-width"></i> Espaciado</span>
+                            <span class="value-display"><span id="letter-spacing-value">-0.25</span>rem</span>
+                        </label>
+                        <input type="range" id="letter-spacing" name="letterSpacing" min="-0.5" max="0.5" value="-0.25" step="0.01">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="outline-width">
+                            <span><i class="fas fa-border-style"></i> Grosor de Borde</span>
+                            <span class="value-display"><span id="outline-width-value">3</span>px</span>
+                        </label>
+                        <input type="range" id="outline-width" name="outlineWidth" min="0" max="10" value="3" step="0.5">
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend><i class="fas fa-shadow"></i> Sombra</legend>
+                    <div class="control-group">
+                        <label for="shadow-color">
+                            <span><i class="fas fa-palette"></i> Color de Sombra</span>
+                        </label>
+                        <input type="color" id="shadow-color" name="shadowColor" value="#5E3143">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="shadow-length">
+                            <span><i class="fas fa-ruler-horizontal"></i> Longitud</span>
+                            <span class="value-display"><span id="shadow-length-value">40</span>px</span>
+                        </label>
+                        <input type="range" id="shadow-length" name="shadowLength" min="0" max="200" value="40">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="shadow-blur">
+                            <span><i class="fas fa-cloud"></i> Desenfoque</span>
+                            <span class="value-display"><span id="shadow-blur-value">5</span>px</span>
+                        </label>
+                        <input type="range" id="shadow-blur" name="shadowBlur" min="0" max="50" value="5" step="0.5">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="start-angle">
+                            <span class="tooltip" data-tooltip="Ángulo de la sombra en la primera letra"><i class="fas fa-compass"></i> Ángulo Inicial</span>
+                            <span class="value-display"><span id="start-angle-value">45</span>°</span>
+                        </label>
+                        <input type="range" id="start-angle" name="startAngle" min="0" max="360" value="45">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="end-angle">
+                            <span class="tooltip" data-tooltip="Ángulo de la sombra en la última letra"><i class="fas fa-compass"></i> Ángulo Final</span>
+                            <span class="value-display"><span id="end-angle-value">135</span>°</span>
+                        </label>
+                        <input type="range" id="end-angle" name="endAngle" min="0" max="360" value="135">
+                    </div>
+                </fieldset>
+                
+                <fieldset>
+                    <legend><i class="fas fa-cube"></i> Efecto 3D</legend>
+                    <div class="control-group">
+                        <label for="perspective-arc">
+                            <span class="tooltip" data-tooltip="Crea un arco vertical con el texto"><i class="fas fa-wave-square"></i> Curvatura</span>
+                            <span class="value-display"><span id="perspective-arc-value">0</span></span>
+                        </label>
+                        <input type="range" id="perspective-arc" name="perspectiveArc" min="-150" max="150" value="0">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="perspective-rotate">
+                            <span class="tooltip" data-tooltip="Rota las letras hacia los lados"><i class="fas fa-sync-alt"></i> Rotación</span>
+                            <span class="value-display"><span id="perspective-rotate-value">0</span>°</span>
+                        </label>
+                        <input type="range" id="perspective-rotate" name="perspectiveRotate" min="-90" max="90" value="0">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="depth-intensity">
+                            <span class="tooltip" data-tooltip="Aleja las letras de los extremos para dar profundidad"><i class="fas fa-box-open"></i> Intensidad 3D</span>
+                            <span class="value-display"><span id="depth-intensity-value">5</span></span>
+                        </label>
+                        <input type="range" id="depth-intensity" name="depthIntensity" min="1" max="20" value="5">
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend><i class="fas fa-magic"></i> Efectos Especiales</legend>
+                    <div class="control-group switch-group">
+                        <label for="glow-effect">
+                            <span><i class="fas fa-sun"></i> Efecto de Resplandor</span>
+                            <div class="switch">
+                                <input type="checkbox" id="glow-effect" name="glowEffect">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="control-group switch-group">
+                        <label for="float-animation">
+                            <span><i class="fas fa-feather"></i> Animación Flotante</span>
+                            <div class="switch">
+                                <input type="checkbox" id="float-animation" name="floatAnimation">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="animation-speed">
+                            <span><i class="fas fa-tachometer-alt"></i> Velocidad Animación</span>
+                            <span class="value-display"><span id="animation-speed-value">6</span>s</span>
+                        </label>
+                        <input type="range" id="animation-speed" name="animationSpeed" min="1" max="15" value="6">
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend><i class="fas fa-sliders-h"></i> Preajustes Rápidos</legend>
+                    <div class="preset-buttons">
+                        <button type="button" class="preset-btn" data-preset="deep"><i class="fas fa-mountain"></i> Profundo</button>
+                        <button type="button" class="preset-btn" data-preset="neon"><i class="fas fa-lightbulb"></i> Neón</button>
+                        <button type="button" class="preset-btn" data-preset="elegant"><i class="fas fa-crown"></i> Elegante</button>
+                        <button type="button" class="preset-btn" data-preset="bold"><i class="fas fa-bold"></i> Negrita</button>
+                    </div>
+                </fieldset>
+            </form>
+            <div class="actions">
+                <button id="copy-css-button"><i class="fas fa-copy"></i> Copiar HTML Completo</button>
+                <button id="reset-button"><i class="fas fa-redo"></i> Restablecer Configuración</button>
+                <div id="copy-message"></div>
+            </div>
+        </section>
+
+        <section class="demo-container" id="demo-container">
+            <div class="background-selector">
+                <div class="bg-btn active" style="background: linear-gradient(135deg, #1a1a2e, #2c3e50);" data-bg="linear-gradient(135deg, #1a1a2e, #2c3e50)"></div>
+                <div class="bg-btn" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);" data-bg="linear-gradient(135deg, #0f2027, #203a43, #2c5364)"></div>
+                <div class="bg-btn" style="background: linear-gradient(135deg, #23074d, #cc5333);" data-bg="linear-gradient(135deg, #23074d, #cc5333)"></div>
+                <div class="bg-btn" style="background: linear-gradient(135deg, #000000, #434343);" data-bg="linear-gradient(135deg, #000000, #434343)"></div>
+            </div>
+            <div class="text-demo">
+                <h1 id="vanish-shadow"></h1>
+            </div>
+        </section>
+    </main>
+
+
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
