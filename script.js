@@ -49,7 +49,6 @@ const presets = {
         glowEffect: true,
         floatAnimation: true,
         animationSpeed: 4,
-        // textColor: '#00ffff' // Duplicado, se eliminará
     },
     elegant: {
         text: "Elegante",
@@ -65,8 +64,8 @@ const presets = {
         depthIntensity: 6,
         perspectiveRotate: -5
     },
-    bold: { // El preset original tenía "Audaz", pero la imagen muestra "Negrita". Se ajustará para coincidir con la imagen.
-        text: "Negrita", // Corregido para coincidir con la imagen
+    bold: {
+        text: "Negrita",
         textColor: '#ffffff',
         outlineColor: '#000000',
         outlineWidth: 6,
@@ -75,6 +74,87 @@ const presets = {
         shadowBlur: 1,
         shadowColor: '#000000',
         depthIntensity: 3
+    },
+    candy: {
+        text: "Dulce",
+        textColor: '#ff69b4', // Rosa
+        outlineColor: '#8a2be2', // Violeta
+        outlineWidth: 4,
+        letterSpacing: 0.5,
+        shadowLength: 10,
+        shadowBlur: 5,
+        shadowColor: '#ffc0cb', // Rosa claro
+        startAngle: 0,
+        endAngle: 180,
+        depthIntensity: 8,
+        perspectiveRotate: 15,
+        glowEffect: true,
+        animationSpeed: 3
+    },
+    metal: {
+        text: "Metal",
+        textColor: '#c0c0c0', // Plata
+        outlineColor: '#808080', // Gris
+        outlineWidth: 2,
+        letterSpacing: -0.2,
+        shadowLength: 20,
+        shadowBlur: 8,
+        shadowColor: '#404040', // Gris oscuro
+        startAngle: 60,
+        endAngle: 120,
+        depthIntensity: 12,
+        perspectiveRotate: 10,
+        floatAnimation: true,
+        animationSpeed: 5
+    },
+    retro: {
+        text: "Retro",
+        textColor: '#ffff00', // Amarillo brillante
+        outlineColor: '#ff00ff', // Magenta
+        outlineWidth: 5,
+        letterSpacing: 0.2,
+        shadowLength: 25,
+        shadowBlur: 10,
+        shadowColor: '#ff4500', // Naranja
+        startAngle: 20,
+        endAngle: 160,
+        depthIntensity: 10,
+        perspectiveRotate: -15,
+        glowEffect: true,
+        animationSpeed: 4
+    },
+    galaxy: {
+        text: "Galaxia",
+        textColor: '#ffffff',
+        outlineColor: '#483D8B', // DarkSlateBlue
+        outlineWidth: 2,
+        letterSpacing: 0.1,
+        shadowLength: 0, // Sin sombra alargada
+        shadowBlur: 20,
+        shadowColor: '#8A2BE2', // BlueViolet
+        startAngle: 0,
+        endAngle: 360,
+        depthIntensity: 7,
+        perspectiveRotate: 0,
+        glowEffect: true,
+        floatAnimation: true,
+        animationSpeed: 8
+    },
+    gradient: {
+        text: "Gradiente",
+        textColor: '#ffffff', // Predominantemente blanco, el gradiente se aplicará visualmente
+        outlineColor: '#000000',
+        outlineWidth: 1,
+        letterSpacing: 0.1,
+        shadowLength: 5,
+        shadowBlur: 10,
+        shadowColor: '#777',
+        startAngle: 90,
+        endAngle: 90,
+        depthIntensity: 6,
+        perspectiveRotate: 0,
+        glowEffect: true,
+        animationSpeed: 5,
     }
 };
 
@@ -86,6 +166,7 @@ const shadowHost = document.getElementById('vanish-shadow');
 const demoContainer = document.getElementById('demo-container');
 const copyBtn = document.getElementById('copy-css-button');
 const resetBtn = document.getElementById('reset-button');
+const randomBtn = document.getElementById('random-button'); // Selector para el nuevo botón
 const copyMsg = document.getElementById('copy-message');
 const textColorInput = document.getElementById('text-color');
 const bgButtons = document.querySelectorAll('.bg-btn');
@@ -278,7 +359,6 @@ function hexToRgb(hex) {
  * Actualiza los valores numéricos mostrados al lado de los sliders.
  */
 function updateLabelValues() {
-    // Asegurarse de que los elementos existen antes de intentar actualizar
     const letterSpacingValue = document.getElementById('letter-spacing-value');
     if (letterSpacingValue) letterSpacingValue.textContent = config.letterSpacing.toFixed(2);
 
@@ -481,8 +561,80 @@ function generateAndCopyHtml() {
 function handleReset() {
     config = { ...initialConfig }; // Copia los valores iniciales
     updateFormFromConfig(); // Actualiza los elementos del formulario
-    applyStyles(); // Reaplica los estilos directamente (en lugar de llamar a updateTextDisplay que podría ser redundante si el texto no cambia)
+    applyStyles(); // Reaplica los estilos
 }
+
+/**
+ * Genera una configuración aleatoria para todos los parámetros ajustables.
+ * Mejora la consistencia y la "lindo" de las combinaciones.
+ */
+function handleRandomize() {
+    const newConfig = { ...config }; // Empieza con la configuración actual
+
+    // --- Selección aleatoria de estilos de sombreado y 3D ---
+    const shadowStyles = [
+        // Sombras suaves y profundas
+        { shadowLength: getRandom(100, 200), shadowBlur: getRandom(10, 25), depthIntensity: getRandom(10, 20), perspectiveRotate: getRandom(-30, 30), startAngle: getRandom(70, 110), endAngle: getRandom(70, 110), outlineWidth: getRandom(1, 3), letterSpacing: getRandom(-0.2, 0.1), glowEffect: false, floatAnimation: getRandom(0, 1) > 0.5, animationSpeed: getRandom(4, 8) },
+        // Sombras vibrantes y neón
+        { shadowLength: getRandom(5, 30), shadowBlur: getRandom(15, 30), depthIntensity: getRandom(5, 10), perspectiveRotate: getRandom(-10, 10), startAngle: getRandom(0, 360), endAngle: getRandom(0, 360), outlineWidth: getRandom(2, 4), letterSpacing: getRandom(0.1, 0.4), glowEffect: true, floatAnimation: getRandom(0, 1) > 0.3, animationSpeed: getRandom(3, 6) },
+        // Sombras audaces y con volumen
+        { shadowLength: getRandom(20, 80), shadowBlur: getRandom(2, 8), depthIntensity: getRandom(8, 15), perspectiveRotate: getRandom(-20, 20), startAngle: getRandom(20, 160), endAngle: getRandom(20, 160), outlineWidth: getRandom(4, 7), letterSpacing: getRandom(-0.3, 0.2), glowEffect: false, floatAnimation: getRandom(0, 1) > 0.7, animationSpeed: getRandom(5, 9) },
+        // Efectos más sutiles y elegantes
+        { shadowLength: getRandom(10, 50), shadowBlur: getRandom(5, 15), depthIntensity: getRandom(4, 10), perspectiveRotate: getRandom(-5, 5), startAngle: 90, endAngle: 90, outlineWidth: getRandom(1, 2), letterSpacing: getRandom(-0.1, 0.1), glowEffect: getRandom(0, 1) > 0.7, floatAnimation: false, animationSpeed: getRandom(6, 10) },
+        // Estilos aleatorios puros
+        { shadowLength: getRandom(0, 150), shadowBlur: getRandom(0, 30), depthIntensity: getRandom(1, 15), perspectiveRotate: getRandom(-45, 45), startAngle: getRandom(0, 360), endAngle: getRandom(0, 360), outlineWidth: getRandom(1, 8), letterSpacing: getRandom(-0.5, 0.8), glowEffect: getRandom(0, 1) > 0.5, floatAnimation: getRandom(0, 1) > 0.4, animationSpeed: getRandom(3, 12) }
+    ];
+
+    const selectedStyle = shadowStyles[Math.floor(Math.random() * shadowStyles.length)];
+
+    // Fusionar el estilo seleccionado con la configuración actual
+    Object.assign(newConfig, selectedStyle);
+
+    // --- Selección de colores ---
+    // Priorizar el arcoíris si se selecciona aleatoriamente
+    newConfig.rainbowMode = Math.random() > 0.5;
+    if (newConfig.rainbowMode) {
+        newConfig.textColor = '#FFFFFF'; // Color neutro cuando está en modo arcoíris
+        // Para el arcoíris, a menudo es bueno tener un outline oscuro o plateado
+        newConfig.outlineColor = ['#000000', '#333333', '#808080'][Math.floor(Math.random() * 3)];
+        newConfig.shadowColor = '#000000'; // Sombra oscura para que resalte el arcoíris
+    } else {
+        // Seleccionar colores consistentes entre sí si no es arcoíris
+        const colorPalette = [
+            ['#F8DB28', '#901F06', '#5E3143'], // Amarillo/Oro con sombras rojizas/marrones
+            ['#00ffff', '#000000', '#00ffff'], // Neón azul/cian
+            ['#e0cda7', '#3d2b1f', '#000000'], // Beige/Oro con sombras marrón oscuro
+            ['#ffffff', '#000000', '#404040'], // Blanco con sombras grises/negras
+            ['#ff69b4', '#8a2be2', '#ffc0cb'], // Rosa/Violeta
+            ['#c0c0c0', '#808080', '#404040'], // Metálico/Plateado
+            ['#ffff00', '#ff00ff', '#ff4500'], // Retro amarillo/magenta/naranja
+            ['#ffffff', '#483D8B', '#8A2BE2'], // Galaxia blanco/azul oscuro/violeta
+        ];
+        const selectedPalette = colorPalette[Math.floor(Math.random() * colorPalette.length)];
+        newConfig.textColor = selectedPalette[0];
+        newConfig.outlineColor = selectedPalette[1];
+        newConfig.shadowColor = selectedPalette[2];
+    }
+
+    // --- Selección de texto ---
+    const texts = ['¡Genial!', 'Wow!', 'Explosivo!', 'Estilo 3D', 'Diseño Web', '¡Avanzado!', 'Dulce!', 'Creativo'];
+    newConfig.text = texts[Math.floor(Math.random() * texts.length)];
+
+    config = newConfig; // Actualiza la configuración global
+    updateFormFromConfig(); // Refleja los nuevos valores en el formulario
+    applyStyles(); // Aplica los nuevos estilos
+}
+
+/**
+ * Genera un número aleatorio entre min (inclusive) y max (inclusive).
+ * @param {number} min - Valor mínimo.
+ * @param {number} max - Valor máximo.
+ * @returns {number} Un número aleatorio.
+ */
+function getRandom(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
 
 /**
  * Crea las partículas de fondo de manera dinámica.
@@ -530,7 +682,6 @@ function createParticles(count = 80) { // Por defecto 80 partículas
 // ========================================
 
 // Actualiza estilos cada vez que cambia un control del formulario
-// Se ha corregido el evento para que sea 'input' y se use un debounce
 form.addEventListener('input', () => {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
@@ -545,6 +696,11 @@ copyBtn.addEventListener('click', generateAndCopyHtml);
 // Manejar clic en botón de reset
 resetBtn.addEventListener('click', handleReset);
 
+// Manejar clic en botón de aleatorio
+if (randomBtn) { // Asegurarse de que el botón existe antes de añadir el listener
+    randomBtn.addEventListener('click', handleRandomize);
+}
+
 // Manejar clics en botones de preset
 presetButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -553,7 +709,7 @@ presetButtons.forEach(btn => {
             // Fusiona la configuración del preset con la configuración actual
             config = { ...config, ...presets[presetName] };
             updateFormFromConfig(); // Actualiza el formulario
-            applyStyles(); // Reaplica los estilos directamente
+            applyStyles(); // Reaplica los estilos
         }
     });
 });

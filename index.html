@@ -189,16 +189,21 @@
                 <!-- Fieldset: Preajustes Rápidos -->
                 <fieldset>
                     <legend><i class="fas fa-sliders-h"></i> Preajustes Rápidos</legend>
-                    <div class="preset-buttons">
-                        <button type="button" class="preset-btn" data-preset="deep"><i class="fas fa-mountain"></i>
-                            Profundo</button>
-                        <button type="button" class="preset-btn" data-preset="neon"><i class="fas fa-lightbulb"></i>
-                            Neón</button>
-                        <button type="button" class="preset-btn" data-preset="elegant"><i class="fas fa-crown"></i>
-                            Elegante</button>
-                        <button type="button" class="preset-btn" data-preset="bold"><i class="fas fa-bold"></i>
-                            Negrita</button>
-                    </div>
+                    <!-- Dentro del fieldset de Preajustes Rápidos -->
+<div class="preset-buttons">
+    <button type="button" class="preset-btn" data-preset="deep"><i class="fas fa-mountain"></i> Profundo</button>
+    <button type="button" class="preset-btn" data-preset="neon"><i class="fas fa-lightbulb"></i> Neón</button>
+    <button type="button" class="preset-btn" data-preset="elegant"><i class="fas fa-crown"></i> Elegante</button>
+    <button type="button" class="preset-btn" data-preset="bold"><i class="fas fa-bold"></i> Negrita</button>
+    <!-- Nuevos presets -->
+    <button type="button" class="preset-btn" data-preset="candy"><i class="fas fa-candy-cane"></i> Dulce</button>
+    <button type="button" class="preset-btn" data-preset="metal"><i class="fas fa-gem"></i> Metal</button>
+    <button type="button" class="preset-btn" data-preset="retro"><i class="fas fa-video"></i> Retro</button>
+    <button type="button" class="preset-btn" data-preset="galaxy"><i class="fas fa-star"></i> Galaxia</button>
+     <!-- El botón de aleatorio -->
+     <button id="random-button" class="preset-btn"><i class="fas fa-random"></i> Aleatorio</button>
+</div>
+
                 </fieldset>
             </form>
 
@@ -222,11 +227,13 @@
                     data-bg="linear-gradient(135deg, #23074d, #cc5333)"></div>
                 <div class="bg-btn" style="background: linear-gradient(135deg, #000000, #434343);"
                     data-bg="linear-gradient(135deg, #000000, #434343)"></div>
+                    
             </div>
             <!-- El texto 3D -->
             <div class="text-demo">
                 <h1 id="vanish-shadow"></h1>
             </div>
+
         </section>
     </main>
 
