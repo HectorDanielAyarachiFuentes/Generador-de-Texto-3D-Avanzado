@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generador de Texto 3D Avanzado</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-        <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGOERCMjgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM5MDFGMDYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2EpIiBkPSJNOTYgMzg0aDMyMGwtMzItMjU2SDEyOEw5NiAzODR6TTI1NiA2NGMxNy43IDAgMzIgMTQuMyAzMiAzMnYzMmgtNjRWOTZjMC0xNy43IDE0LjMtMzIgMzItMzJ6TTY0IDQxNmMwIDE3LjcgMTQuMyAzMiAzMiAzMmgzMjBjMTcuNyAwIDMyLTE0LjMgMzItMzJWMzg0SDY0djMyeiIvPjxwYXRoIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iLjMiIGQ9Ik05NiAzODRsMzItMjU2aDI1NmwtMzIgMjU2SDk2eiIvPjx0ZXh0IHg9IjI1NiIgeT0iMjgwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+M0Q8L3RleHQ+PC9zdmc+">
-
-  <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml"href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImEiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPjxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNGOERCMjgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM5MDFGMDYiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cGF0aCBmaWxsPSJ1cmwoI2EpIiBkPSJNOTYgMzg0aDMyMGwtMzItMjU2SDEyOEw5NiAzODR6TTI1NiA2NGMxNy43IDAgMzIgMTQuMyAzMiAzMnYzMmgtNjRWOTZjMC0xNy43IDE0LjMtMzIgMzItMzJ6TTY0IDQxNmMwIDE3LjcgMTQuMyAzMiAzMiAzMmgzMjBjMTcuNyAwIDMyLTE0LjMgMzItMzJWMzg0SDY0djMyeiIvPjxwYXRoIGZpbGw9IiMwMDAiIGZpbGwtb3BhY2l0eT0iLjMiIGQ9Ik05NiAzODRsMzItMjU2aDI1NmwtMzIgMjU2SDk2eiIvPjx0ZXh0IHg9IjI1NiIgeT0iMjgwIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTIwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0iI2ZmZiIgdGV4dC1hbmNob3I9Im1pZGRsZSI+M0Q8L3RleHQ+PC9zdmc+">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="particles" id="particles"></div>
 
@@ -23,7 +24,7 @@
                         </label>
                         <input type="text" id="title-text" name="text" value="3D Impresionante">
                     </div>
-                    
+
                     <div class="control-group switch-group">
                         <label for="rainbow-toggle">
                             <span><i class="fas fa-rainbow"></i> Color Arcoíris</span>
@@ -53,7 +54,8 @@
                             <span><i class="fas fa-text-width"></i> Espaciado</span>
                             <span class="value-display"><span id="letter-spacing-value">-0.25</span>rem</span>
                         </label>
-                        <input type="range" id="letter-spacing" name="letterSpacing" min="-0.5" max="0.5" value="-0.25" step="0.01">
+                        <input type="range" id="letter-spacing" name="letterSpacing" min="-0.5" max="0.5" value="-0.25"
+                            step="0.01">
                     </div>
 
                     <div class="control-group">
@@ -61,7 +63,8 @@
                             <span><i class="fas fa-border-style"></i> Grosor de Borde</span>
                             <span class="value-display"><span id="outline-width-value">3</span>px</span>
                         </label>
-                        <input type="range" id="outline-width" name="outlineWidth" min="0" max="10" value="3" step="0.5">
+                        <input type="range" id="outline-width" name="outlineWidth" min="0" max="10" value="3"
+                            step="0.5">
                     </div>
                 </fieldset>
 
@@ -92,7 +95,8 @@
 
                     <div class="control-group">
                         <label for="start-angle">
-                            <span class="tooltip" data-tooltip="Ángulo de la sombra en la primera letra"><i class="fas fa-compass"></i> Ángulo Inicial</span>
+                            <span class="tooltip" data-tooltip="Ángulo de la sombra en la primera letra"><i
+                                    class="fas fa-compass"></i> Ángulo Inicial</span>
                             <span class="value-display"><span id="start-angle-value">45</span>°</span>
                         </label>
                         <input type="range" id="start-angle" name="startAngle" min="0" max="360" value="45">
@@ -100,18 +104,20 @@
 
                     <div class="control-group">
                         <label for="end-angle">
-                            <span class="tooltip" data-tooltip="Ángulo de la sombra en la última letra"><i class="fas fa-compass"></i> Ángulo Final</span>
+                            <span class="tooltip" data-tooltip="Ángulo de la sombra en la última letra"><i
+                                    class="fas fa-compass"></i> Ángulo Final</span>
                             <span class="value-display"><span id="end-angle-value">135</span>°</span>
                         </label>
                         <input type="range" id="end-angle" name="endAngle" min="0" max="360" value="135">
                     </div>
                 </fieldset>
-                
+
                 <fieldset>
                     <legend><i class="fas fa-cube"></i> Efecto 3D</legend>
                     <div class="control-group">
                         <label for="perspective-arc">
-                            <span class="tooltip" data-tooltip="Crea un arco vertical con el texto"><i class="fas fa-wave-square"></i> Curvatura</span>
+                            <span class="tooltip" data-tooltip="Crea un arco vertical con el texto"><i
+                                    class="fas fa-wave-square"></i> Curvatura</span>
                             <span class="value-display"><span id="perspective-arc-value">0</span></span>
                         </label>
                         <input type="range" id="perspective-arc" name="perspectiveArc" min="-150" max="150" value="0">
@@ -119,15 +125,19 @@
 
                     <div class="control-group">
                         <label for="perspective-rotate">
-                            <span class="tooltip" data-tooltip="Rota las letras hacia los lados"><i class="fas fa-sync-alt"></i> Rotación</span>
+                            <span class="tooltip" data-tooltip="Rota las letras hacia los lados"><i
+                                    class="fas fa-sync-alt"></i> Rotación</span>
                             <span class="value-display"><span id="perspective-rotate-value">0</span>°</span>
                         </label>
-                        <input type="range" id="perspective-rotate" name="perspectiveRotate" min="-90" max="90" value="0">
+                        <input type="range" id="perspective-rotate" name="perspectiveRotate" min="-90" max="90"
+                            value="0">
                     </div>
 
                     <div class="control-group">
                         <label for="depth-intensity">
-                            <span class="tooltip" data-tooltip="Aleja las letras de los extremos para dar profundidad"><i class="fas fa-box-open"></i> Intensidad 3D</span>
+                            <span class="tooltip"
+                                data-tooltip="Aleja las letras de los extremos para dar profundidad"><i
+                                    class="fas fa-box-open"></i> Intensidad 3D</span>
                             <span class="value-display"><span id="depth-intensity-value">5</span></span>
                         </label>
                         <input type="range" id="depth-intensity" name="depthIntensity" min="1" max="20" value="5">
@@ -168,10 +178,14 @@
                 <fieldset>
                     <legend><i class="fas fa-sliders-h"></i> Preajustes Rápidos</legend>
                     <div class="preset-buttons">
-                        <button type="button" class="preset-btn" data-preset="deep"><i class="fas fa-mountain"></i> Profundo</button>
-                        <button type="button" class="preset-btn" data-preset="neon"><i class="fas fa-lightbulb"></i> Neón</button>
-                        <button type="button" class="preset-btn" data-preset="elegant"><i class="fas fa-crown"></i> Elegante</button>
-                        <button type="button" class="preset-btn" data-preset="bold"><i class="fas fa-bold"></i> Negrita</button>
+                        <button type="button" class="preset-btn" data-preset="deep"><i class="fas fa-mountain"></i>
+                            Profundo</button>
+                        <button type="button" class="preset-btn" data-preset="neon"><i class="fas fa-lightbulb"></i>
+                            Neón</button>
+                        <button type="button" class="preset-btn" data-preset="elegant"><i class="fas fa-crown"></i>
+                            Elegante</button>
+                        <button type="button" class="preset-btn" data-preset="bold"><i class="fas fa-bold"></i>
+                            Negrita</button>
                     </div>
                 </fieldset>
             </form>
@@ -184,10 +198,14 @@
 
         <section class="demo-container" id="demo-container">
             <div class="background-selector">
-                <div class="bg-btn active" style="background: linear-gradient(135deg, #1a1a2e, #2c3e50);" data-bg="linear-gradient(135deg, #1a1a2e, #2c3e50)"></div>
-                <div class="bg-btn" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);" data-bg="linear-gradient(135deg, #0f2027, #203a43, #2c5364)"></div>
-                <div class="bg-btn" style="background: linear-gradient(135deg, #23074d, #cc5333);" data-bg="linear-gradient(135deg, #23074d, #cc5333)"></div>
-                <div class="bg-btn" style="background: linear-gradient(135deg, #000000, #434343);" data-bg="linear-gradient(135deg, #000000, #434343)"></div>
+                <div class="bg-btn active" style="background: linear-gradient(135deg, #1a1a2e, #2c3e50);"
+                    data-bg="linear-gradient(135deg, #1a1a2e, #2c3e50)"></div>
+                <div class="bg-btn" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);"
+                    data-bg="linear-gradient(135deg, #0f2027, #203a43, #2c5364)"></div>
+                <div class="bg-btn" style="background: linear-gradient(135deg, #23074d, #cc5333);"
+                    data-bg="linear-gradient(135deg, #23074d, #cc5333)"></div>
+                <div class="bg-btn" style="background: linear-gradient(135deg, #000000, #434343);"
+                    data-bg="linear-gradient(135deg, #000000, #434343)"></div>
             </div>
             <div class="text-demo">
                 <h1 id="vanish-shadow"></h1>
@@ -195,6 +213,7 @@
         </section>
     </main>
 
-<script type="module" src="script.js"></script>
+    <script type="module" src="script.js"></script>
 </body>
+
 </html>
