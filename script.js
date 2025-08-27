@@ -49,7 +49,7 @@ const presets = {
         glowEffect: true,
         floatAnimation: true,
         animationSpeed: 4,
-        textColor: '#00ffff'
+        // textColor: '#00ffff' // Duplicado, se eliminará
     },
     elegant: {
         text: "Elegante",
@@ -65,8 +65,8 @@ const presets = {
         depthIntensity: 6,
         perspectiveRotate: -5
     },
-    bold: {
-        text: "Audaz",
+    bold: { // El preset original tenía "Audaz", pero la imagen muestra "Negrita". Se ajustará para coincidir con la imagen.
+        text: "Negrita", // Corregido para coincidir con la imagen
         textColor: '#ffffff',
         outlineColor: '#000000',
         outlineWidth: 6,
@@ -278,16 +278,36 @@ function hexToRgb(hex) {
  * Actualiza los valores numéricos mostrados al lado de los sliders.
  */
 function updateLabelValues() {
-    document.getElementById('letter-spacing-value').textContent = config.letterSpacing.toFixed(2);
-    document.getElementById('outline-width-value').textContent = config.outlineWidth;
-    document.getElementById('shadow-length-value').textContent = config.shadowLength;
-    document.getElementById('shadow-blur-value').textContent = config.shadowBlur;
-    document.getElementById('start-angle-value').textContent = config.startAngle;
-    document.getElementById('end-angle-value').textContent = config.endAngle;
-    document.getElementById('perspective-arc-value').textContent = config.perspectiveArc;
-    document.getElementById('perspective-rotate-value').textContent = config.perspectiveRotate;
-    document.getElementById('depth-intensity-value').textContent = config.depthIntensity;
-    document.getElementById('animation-speed-value').textContent = config.animationSpeed;
+    // Asegurarse de que los elementos existen antes de intentar actualizar
+    const letterSpacingValue = document.getElementById('letter-spacing-value');
+    if (letterSpacingValue) letterSpacingValue.textContent = config.letterSpacing.toFixed(2);
+
+    const outlineWidthValue = document.getElementById('outline-width-value');
+    if (outlineWidthValue) outlineWidthValue.textContent = config.outlineWidth;
+
+    const shadowLengthValue = document.getElementById('shadow-length-value');
+    if (shadowLengthValue) shadowLengthValue.textContent = config.shadowLength;
+
+    const shadowBlurValue = document.getElementById('shadow-blur-value');
+    if (shadowBlurValue) shadowBlurValue.textContent = config.shadowBlur;
+
+    const startAngleValue = document.getElementById('start-angle-value');
+    if (startAngleValue) startAngleValue.textContent = config.startAngle;
+
+    const endAngleValue = document.getElementById('end-angle-value');
+    if (endAngleValue) endAngleValue.textContent = config.endAngle;
+
+    const perspectiveArcValue = document.getElementById('perspective-arc-value');
+    if (perspectiveArcValue) perspectiveArcValue.textContent = config.perspectiveArc;
+
+    const perspectiveRotateValue = document.getElementById('perspective-rotate-value');
+    if (perspectiveRotateValue) perspectiveRotateValue.textContent = config.perspectiveRotate;
+
+    const depthIntensityValue = document.getElementById('depth-intensity-value');
+    if (depthIntensityValue) depthIntensityValue.textContent = config.depthIntensity;
+
+    const animationSpeedValue = document.getElementById('animation-speed-value');
+    if (animationSpeedValue) animationSpeedValue.textContent = config.animationSpeed;
 }
 
 /**
@@ -308,6 +328,7 @@ function updateFormFromConfig() {
                 const valueDisplay = document.getElementById(`${el.id}-value`);
                 if (valueDisplay) {
                     let value = el.value;
+                    // Añadir unidades si son necesarias
                     if (el.id === 'animation-speed') value += 's';
                     else if (el.id.includes('angle') || el.id === 'perspective-rotate') value += '°';
                     else if (el.id.includes('width') || el.id.includes('length') || el.id.includes('blur') || el.id.includes('intensity') || el.id.includes('arc')) value += 'px';
@@ -460,7 +481,7 @@ function generateAndCopyHtml() {
 function handleReset() {
     config = { ...initialConfig }; // Copia los valores iniciales
     updateFormFromConfig(); // Actualiza los elementos del formulario
-    handleUpdate(); // Reaplica los estilos
+    applyStyles(); // Reaplica los estilos directamente (en lugar de llamar a updateTextDisplay que podría ser redundante si el texto no cambia)
 }
 
 /**
@@ -469,6 +490,9 @@ function handleReset() {
  */
 function createParticles(count = 80) { // Por defecto 80 partículas
     if (!particlesContainer) return; // Si el contenedor no existe, no hagas nada
+
+    // Limpiar partículas existentes antes de crear nuevas
+    particlesContainer.innerHTML = '';
 
     for (let i = 0; i < count; i++) {
         const particle = document.createElement('div');
@@ -506,8 +530,8 @@ function createParticles(count = 80) { // Por defecto 80 partículas
 // ========================================
 
 // Actualiza estilos cada vez que cambia un control del formulario
+// Se ha corregido el evento para que sea 'input' y se use un debounce
 form.addEventListener('input', () => {
-    // Usa un debounce para evitar actualizaciones excesivas mientras se ajusta un slider
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
         readConfigFromForm();
@@ -529,7 +553,7 @@ presetButtons.forEach(btn => {
             // Fusiona la configuración del preset con la configuración actual
             config = { ...config, ...presets[presetName] };
             updateFormFromConfig(); // Actualiza el formulario
-            handleUpdate(); // Reaplica los estilos
+            applyStyles(); // Reaplica los estilos directamente
         }
     });
 });
