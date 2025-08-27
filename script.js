@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- ESTADO Y CONFIGURACIÓN INICIAL ---
     const initialConfig = {
-        text: '3D Impresionante',
+        text: 'Dulce!',
         rainbowMode: false,
         textColor: '#F8DB28',
         outlineColor: '#901F06',
