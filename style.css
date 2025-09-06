@@ -1,4 +1,3 @@
-
 /* =============================== */
 /*          VARIABLES CSS          */
 /* =============================== */
@@ -126,17 +125,17 @@ body {
     line-height: 1.2;
 }
 
-/* Reorganizar el flujo principal del container */
-.container > main { /* Target the direct main child */
+/* REEMPLAZO: EL NUEVO CONTENEDOR PARA LOS PANELES */
+.app-content-area {
     display: flex;
-    flex-wrap: nowrap; /* Keep controls and demo side by side */
-    flex: 1;
+    flex-wrap: nowrap;
+    flex: 1; /* Ocupa el espacio restante en el contenedor */
     min-height: 500px; /* Altura mínima para el contenido */
 }
 
 
 /* =============================== */
-/*        CONTENEDOR DE CONTROLES  */
+/*        CONTENEDOR DE CONTROLES (Panel izquierdo)  */
 /* =============================== */
 .controls-container {
     flex: 0 0 200px; /* Ancho fijo más compacto para los controles */
@@ -168,7 +167,7 @@ body {
 }
 
 /* =============================== */
-/*         CONTENEDOR DE DEMO      */
+/*         CONTENEDOR DE DEMO (Panel central)      */
 /* =============================== */
 .demo-container {
     flex: 1; /* Ocupa el resto del espacio */
@@ -180,10 +179,7 @@ body {
     padding: 5px; /* Padding muy reducido */
     background: var(--dulce-background-dark); /* Fondo oscuro para el texto "dulCE!" */
     position: relative;
-    border: 1px solid var(--ms-paint-border-shadow); /* Borde del "lienzo" */
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
+    /* Borders handled by the panels on either side */
     padding-bottom: 25px; /* Espacio para la barra de estado */
 }
 
@@ -224,27 +220,96 @@ body {
     background-color: var(--ms-paint-bg-light);
 }
 
+/* =============================== */
+/*         NUEVO PANEL DERECHO (Marcador)      */
+/* =============================== */
+.right-panel {
+    flex: 0 0 100px; /* Ancho fijo para el panel derecho */
+    background: var(--ms-paint-bg-light);
+    border-left: 1px solid var(--ms-paint-border-shadow); /* Borde separador */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-panel .panel-header {
+    background-color: var(--ms-paint-bg-medium); /* Fondo de la barra de título del panel */
+    color: var(--ms-paint-text-primary);
+    padding: 3px 6px;
+    font-weight: bold;
+    font-size: 0.8em;
+    border-bottom: 1px solid var(--ms-paint-border-dark);
+    border-top: 1px solid var(--ms-paint-border-light);
+    margin-bottom: 5px;
+}
+
+.right-panel .panel-content {
+    padding: 5px;
+    flex-grow: 1; /* Permite que el contenido se expanda */
+}
+
+/* Estilos para "Seleccionar" y "Recortar" */
+.right-panel .tool-actions-row {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 8px;
+}
+
+.right-panel .tool-action-btn {
+    flex: 1; /* Para que compartan el espacio horizontal */
+    background: var(--ms-paint-bg-light);
+    color: var(--ms-paint-text-primary);
+    border: none;
+    border-top: 1px solid var(--ms-paint-border-light);
+    border-left: 1px solid var(--ms-paint-border-light);
+    border-right: 1px solid var(--ms-paint-border-dark);
+    border-bottom: 1px solid var(--ms-paint-border-dark);
+    padding: 2px 4px;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 0.7em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+.right-panel .tool-action-btn i {
+    font-size: 0.9em;
+}
+.right-panel .tool-action-btn:hover {
+    background: var(--ms-paint-bg-medium);
+    border-top: 1px solid var(--ms-paint-border-dark);
+    border-left: 1px solid var(--ms-paint-border-dark);
+    border-right: 1px solid var(--ms-paint-border-light);
+    border-bottom: 1px solid var(--ms-paint-border-light);
+    transform: none; /* No animar estos botones */
+}
 
 /* =============================== */
-/*      SELECTOR DE FONDO (PALETA DE COLORES) */
+/*      SELECTOR DE FONDO (PALETA DE COLORES) - AHORA EN EL PANEL DERECHO */
 /* =============================== */
+/* Eliminar posicionamiento absoluto anterior */
 .background-selector {
-    position: absolute;
-    top: 5px; /* Posición ajustada */
-    right: 5px; /* Posición ajustada */
+    position: static;
+    top: unset;
+    right: unset;
     display: grid;
-    grid-template-columns: repeat(9, 1fr); /* 9 columnas como la paleta de Paint */
-    gap: 1px; /* Espacio muy reducido */
+    /* Las columnas se ajustan para el panel derecho */
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas en el panel derecho */
+    gap: 0; /* Espacio muy reducido */
     z-index: 10;
-    border: 1px solid; /* Borde más fino */
+    border: 1px solid;
     border-color: var(--ms-paint-border-light) var(--ms-paint-border-dark) var(--ms-paint-border-dark) var(--ms-paint-border-light);
     background-color: var(--ms-paint-bg-light);
-    padding: 1px; /* Padding muy reducido */
+    padding: 1px;
+    width: fit-content; /* Ajustar el ancho a su contenido */
+    margin: 0 auto; /* Centrar la paleta */
+    margin-bottom: 5px;
 }
 
 .bg-btn {
-    width: 14px; /* Botones más pequeños */
-    height: 14px;
+    width: 18px; /* Botones más pequeños */
+    height: 18px;
     border-radius: 0;
     border: 1px solid var(--ms-paint-border-shadow);
     cursor: pointer;
@@ -278,6 +343,11 @@ fieldset {
     margin-bottom: 10px; /* Margen reducido */
     background: var(--ms-paint-bg-light);
     transition: none;
+}
+/* Estilo específico para el fieldset de presets en el panel derecho */
+.right-panel .presets-fieldset {
+    margin-bottom: 8px; /* Menor margen si hay otros elementos debajo */
+    padding: 4px; /* Padding reducido */
 }
 
 fieldset:hover {
@@ -433,7 +503,7 @@ input[type="text"]:focus {
 }
 
 /* =============================== */
-/*          BOTONES DE ACCIÓN      */
+/*          BOTONES DE ACCIÓN (Panel izquierdo)      */
 /* =============================== */
 .actions {
     margin-top: 10px; /* Margen reducido */
@@ -641,16 +711,53 @@ input:checked + .slider:before {
 }
 
 /* =============================== */
-/*        BOTONES DE PRESET        */
+/*        BOTONES DE PRESET (Ahora en el panel derecho como un grid de iconos)     */
 /* =============================== */
-.preset-buttons {
+/* Eliminamos el estilo anterior de preset-buttons en el controls-container */
+/* y creamos uno nuevo para el right-panel */
+
+.right-panel .preset-buttons.tool-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 4px; /* Espacio reducido */
-    margin-top: 8px;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas para iconos cuadrados */
+    gap: 3px; /* Pequeño espacio entre iconos */
+    margin-top: 5px;
+    padding-bottom: 8px; /* Espacio debajo de la cuadrícula */
+    border-bottom: 1px solid var(--ms-paint-border-dark); /* Línea divisoria */
+    margin-bottom: 8px;
 }
 
-/* Los estilos de .preset-btn ya están definidos en los botones generales */
+.right-panel .preset-buttons.tool-grid .preset-btn {
+    width: 30px; /* Tamaño fijo pequeño */
+    height: 30px;
+    padding: 0; /* Eliminar padding para que el ícono sea el centro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2em; /* Hacer los íconos más grandes */
+    background: var(--ms-paint-bg-light);
+    color: var(--ms-paint-text-primary);
+    border: none;
+    border-top: 1px solid var(--ms-paint-border-light);
+    border-left: 1px solid var(--ms-paint-border-light);
+    border-right: 1px solid var(--ms-paint-border-dark);
+    border-bottom: 1px solid var(--ms-paint-border-dark);
+    transition: none; /* Sin transiciones para el estilo retro */
+}
+
+.right-panel .preset-buttons.tool-grid .preset-btn i {
+    display: block; /* Asegurar que el ícono se muestre correctamente */
+    font-size: 1em; /* Tamaño relativo al botón */
+    margin: 0; /* Sin margen extra */
+}
+
+.right-panel .preset-buttons.tool-grid .preset-btn:hover {
+    background: var(--ms-paint-bg-medium);
+    border-top: 1px solid var(--ms-paint-border-dark);
+    border-left: 1px solid var(--ms-paint-border-dark);
+    border-right: 1px solid var(--ms-paint-border-light);
+    border-bottom: 1px solid var(--ms-paint-border-light);
+    transform: none; /* No animar en hover */
+}
 
 
 /* =============================== */
@@ -666,7 +773,8 @@ input:checked + .slider:before {
             display: none; /* Ocultar barras en móvil para ahorrar espacio */
         }
     }
-    .container > main {
+    /* El nuevo contenedor para los paneles se convierte en columna */
+    .app-content-area {
         flex-direction: column;
     }
 
@@ -683,17 +791,30 @@ input:checked + .slider:before {
         min-width: unset;
         padding: 10px 5px;
         border: none;
+        border-bottom: 1px solid var(--ms-paint-border-shadow); /* Añadir borde inferior */
+    }
+
+    /* Panel derecho se ajusta al ancho completo en móvil */
+    .right-panel {
+        flex: 1;
+        border-left: none;
+        border-top: 1px solid var(--ms-paint-border-shadow); /* Borde superior en móvil */
+        max-height: none;
+        height: auto;
     }
 
     #vanish-shadow {
         font-size: 60px;
     }
 
+    /* Ajuste de paleta de colores en móvil */
     .background-selector {
-        top: 5px;
-        right: 5px;
-        gap: 1px;
-        grid-template-columns: repeat(6, 1fr); /* Menos columnas en tablet */
+        grid-template-columns: repeat(6, 1fr); /* Más columnas en móvil si hay espacio */
+        width: 100%; /* Ocupa el ancho completo */
+    }
+    .bg-btn {
+        width: 22px; /* Ajustar tamaño de botones de color */
+        height: 22px;
     }
 
     .ms-paint-status-bar {
@@ -742,9 +863,13 @@ input:checked + .slider:before {
         font-size: 0.8em;
     }
 
-    .preset-buttons {
-        grid-template-columns: 1fr;
-        gap: 2px;
+    /* Los botones de preset en el panel derecho mantienen su grid de iconos */
+    .right-panel .preset-buttons.tool-grid {
+        grid-template-columns: repeat(4, 1fr); /* 4 columnas para iconos en tablets pequeñas */
+    }
+    .right-panel .preset-buttons.tool-grid .preset-btn {
+        width: 28px;
+        height: 28px;
     }
 
     #vanish-shadow {
@@ -771,12 +896,15 @@ input:checked + .slider:before {
     }
 
     .bg-btn {
-        width: 10px;
-        height: 10px;
+        width: 16px; /* Aún más pequeños los botones de color */
+        height: 16px;
     }
     .background-selector {
         grid-template-columns: repeat(5, 1fr); /* Menos columnas en móvil */
         padding: 0;
+    }
+    .right-panel .background-selector {
+        grid-template-columns: repeat(4, 1fr); /* Mantener 4 columnas en el panel derecho */
     }
 
     .switch {
@@ -813,7 +941,7 @@ input:checked + .slider:before {
 
 /* Animación de flotación - Mantiene estilo original */
 .float-animation {
-    animation: float 6s ease-in-out infinite;
+    animation: float var(--animation-speed, 6s) ease-in-out infinite;
 }
 
 @keyframes float {
@@ -854,10 +982,10 @@ input:checked + .slider:before {
     }
     80% {
         opacity: 0.3;
-        transform: translateY(-100vh) translateX(calc(random() * 200px - 100px)) rotate(720deg);
+        transform: translateY(-100vh) translateX(var(--particle-translate-x, 0px)) rotate(720deg);
     }
     100% {
-        transform: translateY(-120vh) translateX(calc(random() * 200px - 100px)) rotate(720deg);
+        transform: translateY(-120vh) translateX(var(--particle-translate-x, 0px)) rotate(720deg);
         opacity: 0;
         scale: 1.5;
     }
