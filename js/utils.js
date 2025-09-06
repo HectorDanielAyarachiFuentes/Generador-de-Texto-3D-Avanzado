@@ -56,4 +56,18 @@ export function updateLabelValues(config) {
 
     const animationSpeedValue = document.getElementById('animation-speed-value');
     if (animationSpeedValue) animationSpeedValue.textContent = config.animationSpeed;
+    for (const key in config) {
+        // Convierte camelCase (e.g., letterSpacing) a kebab-case (e.g., letter-spacing)
+        const id = key.replace(/([A-Z])/g, "-$1").toLowerCase();
+        const valueDisplay = document.getElementById(`${id}-value`);
+        
+        if (valueDisplay) {
+            let value = config[key];
+            // Formatea los números flotantes a 2 decimales
+            if (typeof value === 'number' && !Number.isInteger(value)) {
+                value = value.toFixed(2);
+            }
+            valueDisplay.textContent = value;
+        }
+    }
 }
