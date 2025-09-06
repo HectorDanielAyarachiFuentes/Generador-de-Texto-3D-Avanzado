@@ -1,35 +1,54 @@
+
 /* =============================== */
 /*          VARIABLES CSS          */
 /* =============================== */
 :root {
-    /* Colores primarios y de acento */
-    --primary: #6ab1ee;         /* Un azul cielo vibrante */
-    --primary-dark: #4a90e2;    /* Versión más oscura del azul */
-    --accent: #FFD700;          /* Un dorado para destacar */
+    /* Colores primarios y de acento (para animaciones y efectos del texto "dulCE!") */
+    --primary: #6ab1ee;
+    --primary-dark: #4a90e2;
+    --accent: #FFD700;
 
-    /* Colores de fondo */
-    --bg-darker: #0d0d1a;       /* Azul marino muy oscuro */
-    --bg-dark: #1a1a2e;         /* Azul noche */
-    --bg-content: rgba(0, 0, 0, 0.2); /* Fondo semitransparente para contenido */
-    --bg-card: rgba(255, 255, 255, 0.05); /* Fondo muy sutil para tarjetas */
+    /* Colores MS Paint / Windows 95 UI */
+    --ms-paint-bg-light: #C0C0C0; /* Fondo principal gris claro */
+    --ms-paint-bg-medium: #A0A0A0; /* Gris medio para elementos */
+    --ms-paint-bg-dark: #808080; /* Gris oscuro para sombras */
+    --ms-paint-border-light: #FFFFFF; /* Blanco para realces 3D */
+    --ms-paint-border-dark: #808080; /* Gris oscuro para sombras 3D */
+    --ms-paint-border-shadow: #000000; /* Negro para bordes duros y sombras de ventana */
+    --ms-paint-titlebar-blue: #000080; /* Azul de la barra de título */
+    --ms-paint-menubar-yellow: #F0F000; /* Amarillo de la barra de menú (aproximado) */
+    --ms-paint-statusbar-green: #00A000; /* Verde de la barra de estado */
+    --ms-paint-text-primary: #000000; /* Texto negro */
+    --ms-paint-text-secondary: #404040; /* Texto gris oscuro */
 
-    /* Colores de texto */
-    --text-light: #f0f8ff;      /* Blanco casi puro */
-    --text-muted: #a0a0a0;      /* Gris claro para texto secundario */
-    --text-highlight: var(--primary); /* Color primario para texto que resalta */
+    /* Colores específicos para el texto "Dulce!" y su fondo (oscuro) - Basado en la imagen NEÓN NARANJA/ROJO */
+    --dulce-text-color: #FF8C00; /* Naranja */
+    --dulce-outline-color: #8B0000; /* Rojo Oscuro */
+    --dulce-shadow-color: #FFD700; /* Dorado para la sombra pixelada */
+    --dulce-background-dark: #1a1a2e; /* Fondo oscuro para el área de demostración */
 
-    /* Bordes y separadores */
-    --card-border: rgba(255, 255, 255, 0.1); /* Borde fino y traslúcido */
-    --divider-line: linear-gradient(90deg, transparent, var(--card-border), transparent); /* Gradiente para divisores */
+    /* Mapeo de variables originales a los nuevos estilos de UI (solo donde aplica a la UI) */
+    --bg-darker: var(--dulce-background-dark);
+    --bg-dark: var(--dulce-background-dark);
+    --bg-content: var(--ms-paint-bg-light);
+    --bg-card: var(--ms-paint-bg-light);
 
-    /* Efectos */
-    --blur-strength: 10px;      /* Intensidad del desenfoque */
-    --shadow-medium: 0 10px 20px rgba(0, 0, 0, 0.2); /* Sombra para elementos interactivos */
-    --shadow-large: 0 15px 35px rgba(0, 0, 0, 0.5);  /* Sombra principal del contenedor */
+    --text-light: var(--ms-paint-text-primary);
+    --text-muted: var(--ms-paint-text-secondary);
+    --text-highlight: var(--ms-paint-text-primary);
+
+    --card-border: var(--ms-paint-border-shadow);
+    --divider-line: var(--ms-paint-border-dark);
+
+    /* Efectos (manteniendo los valores originales para animaciones de texto/partículas) */
+    --blur-strength: 10px;
+    --shadow-medium: 0 10px 20px rgba(0, 0, 0, 0.2);
+    --shadow-large: 0 15px 35px rgba(0, 0, 0, 0.5);
 
     /* Tipografía */
-    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    --font-size-base: 16px;     /* Tamaño de fuente base */
+    --ui-font-family: 'Pixelify Sans', 'Consolas', monospace; /* Para la UI retro */
+    --text-font-family: 'Pixelify Sans', 'Consolas', monospace; /* Para el texto "Dulce!" también pixelado */
+    --font-size-base: 11px; /* Tamaño de fuente base más pequeño para la UI */
     --font-weight-bold: 700;
 }
 
@@ -37,158 +56,260 @@
 /*          RESET BÁSICO           */
 /* =============================== */
 * {
-    box-sizing: border-box; /* Permite incluir padding y border en el tamaño total */
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: var(--font-family); /* Aplica la fuente globalmente */
+    font-family: var(--ui-font-family); /* Por defecto, fuente pixel para la UI */
+    -webkit-font-smoothing: none; /* Asegura el renderizado pixelado para la UI */
+    font-smoothing: none;
 }
 
 /* =============================== */
 /*            BODY                 */
 /* =============================== */
 body {
-    /* Gradiente de fondo con dos tonos oscuros */
-    background: linear-gradient(135deg, var(--bg-darker) 0%, var(--bg-dark) 100%);
-    color: var(--text-light);
-    min-height: 100vh;          /* Asegura que ocupe al menos toda la altura de la ventana */
+    background: var(--ms-paint-bg-light); /* Fondo gris claro de Windows 95 */
+    color: var(--ms-paint-text-primary);
+    min-height: 100vh;
     display: flex;
-    justify-content: center;    /* Centra el contenido horizontalmente */
-    align-items: center;        /* Centra el contenido verticalmente */
-    overflow-x: hidden;         /* Oculta el desbordamiento horizontal */
-    padding: 20px;              /* Espaciado alrededor del contenido */
-    font-size: var(--font-size-base); /* Define el tamaño de fuente base */
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    padding: 3px; /* Padding muy reducido */
+    font-size: var(--font-size-base);
 }
 
 /* =============================== */
-/*          CONTENEDOR PRINCIPAL   */
+/*          CONTENEDOR PRINCIPAL (LA VENTANA DE PAINT) */
 /* =============================== */
 .container {
-    display: flex;              /* Usa Flexbox para organizar las secciones */
-    flex-wrap: wrap;            /* Permite que los elementos se envuelvan en pantallas pequeñas */
-    max-width: 1400px;          /* Ancho máximo del contenedor */
-    width: 100%;                /* Ocupa todo el ancho disponible hasta el max-width */
-    background: var(--bg-card); /* Fondo translúcido para dar un efecto de "tarjeta" */
-    border-radius: 20px;        /* Bordes redondeados */
-    overflow: hidden;           /* Asegura que el contenido no se salga de los bordes redondeados */
-    box-shadow: var(--shadow-large); /* Sombra principal para un efecto de profundidad */
-    backdrop-filter: blur(var(--blur-strength)); /* Aplica desenfoque al fondo detrás del contenedor */
-    border: 1px solid var(--card-border); /* Borde sutil */
-    transform: translateZ(0);   /* Para mejorar la compatibilidad con hardware acceleration */
+    display: flex;
+    flex-wrap: nowrap; /* No wrapping for main content */
+    max-width: 900px; /* Ancho ajustado */
+    width: 100%;
+    background: var(--ms-paint-bg-light);
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: 2px 2px 0px var(--ms-paint-border-shadow); /* Sombra más pequeña */
+    backdrop-filter: none;
+    border: 1px solid var(--ms-paint-border-shadow); /* Borde más fino */
+    transform: none;
+    position: relative;
+    flex-direction: column;
 }
+
+/* Barra de título de MS Paint */
+.container::before {
+    content: "Paint - (untitled)"; /* Título */
+    display: block;
+    background-color: var(--ms-paint-titlebar-blue);
+    color: var(--ms-paint-border-light);
+    padding: 1px 4px; /* Padding muy reducido */
+    font-size: 0.8em;
+    font-weight: bold;
+    text-align: left;
+    border-bottom: 1px solid var(--ms-paint-border-shadow);
+    box-shadow: 1px 1px 0px rgba(0,0,0,0.5); /* Sombra sutil */
+    line-height: 1.2; /* Ajuste de altura de línea */
+}
+
+/* Barra de menú de MS Paint */
+.container::after {
+    content: "File Edit Font FontSize Style Palette Options"; /* Menú */
+    display: block;
+    background-color: var(--ms-paint-menubar-yellow);
+    color: var(--ms-paint-text-primary);
+    padding: 1px 4px; /* Padding muy reducido */
+    font-size: 0.7em; /* Fuente más pequeña */
+    text-align: left;
+    border-bottom: 1px solid var(--ms-paint-border-dark);
+    line-height: 1.2;
+}
+
+/* Reorganizar el flujo principal del container */
+.container > main { /* Target the direct main child */
+    display: flex;
+    flex-wrap: nowrap; /* Keep controls and demo side by side */
+    flex: 1;
+    min-height: 500px; /* Altura mínima para el contenido */
+}
+
 
 /* =============================== */
 /*        CONTENEDOR DE CONTROLES  */
 /* =============================== */
 .controls-container {
-    flex: 1;                    /* Permite que esta sección crezca */
-    min-width: 320px;           /* Ancho mínimo para que sea usable */
-    padding: 30px;
-    background: var(--bg-content); /* Fondo ligeramente más oscuro que el container */
-    border-right: 1px solid var(--card-border); /* Separador visual */
-    overflow-y: auto;           /* Permite scroll si el contenido es muy largo */
-    max-height: 100vh;          /* Asegura que no supere la altura de la ventana */
-    scrollbar-width: thin;      /* Estilo del scrollbar (Firefox) */
-    scrollbar-color: var(--primary) var(--bg-content); /* Color del scrollbar */
+    flex: 0 0 200px; /* Ancho fijo más compacto para los controles */
+    padding: 8px; /* Padding reducido */
+    background: var(--ms-paint-bg-light);
+    border-right: 1px solid var(--ms-paint-border-shadow); /* Borde más fino */
+    overflow-y: auto;
+    max-height: calc(100vh - 20px); /* Ajuste para la altura del body padding y barras */
+    scrollbar-width: thin;
+    scrollbar-color: var(--ms-paint-bg-dark) var(--ms-paint-bg-medium);
 }
 
 /* Estilos del scrollbar para Webkit (Chrome, Safari) */
 .controls-container::-webkit-scrollbar {
-    width: 8px;
+    width: 6px; /* Scrollbar más delgado */
 }
 .controls-container::-webkit-scrollbar-track {
-    background: var(--bg-content);
-    border-radius: 4px;
+    background: var(--ms-paint-bg-medium);
+    border-radius: 0;
 }
 .controls-container::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    border-radius: 4px;
-    transition: background 0.3s ease;
+    background: var(--ms-paint-bg-dark);
+    border-radius: 0;
+    border: 1px solid var(--ms-paint-border-shadow);
+    transition: none;
 }
 .controls-container::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-dark);
+    background: var(--ms-paint-bg-dark);
 }
 
 /* =============================== */
 /*         CONTENEDOR DE DEMO      */
 /* =============================== */
 .demo-container {
-    flex: 2;                    /* Ocupa más espacio que los controles */
-    min-width: 400px;           /* Ancho mínimo */
+    flex: 1; /* Ocupa el resto del espacio */
+    min-width: 300px; /* Ancho mínimo para el demo */
     display: flex;
-    flex-direction: column;     /* Organiza los elementos verticalmente */
-    justify-content: center;    /* Centra el contenido verticalmente */
-    align-items: center;        /* Centra el contenido horizontalmente */
-    padding: 40px 20px;
-    background: var(--bg-content); /* Fondo ligeramente más oscuro */
-    position: relative;         /* Para posicionar elementos hijos absolutamente */
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px; /* Padding muy reducido */
+    background: var(--dulce-background-dark); /* Fondo oscuro para el texto "dulCE!" */
+    position: relative;
+    border: 1px solid var(--ms-paint-border-shadow); /* Borde del "lienzo" */
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    padding-bottom: 25px; /* Espacio para la barra de estado */
 }
 
+/* Barra de estado MS Paint */
+.ms-paint-status-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 20px; /* Altura fija reducida */
+    background-color: var(--ms-paint-statusbar-green);
+    border-top: 1px solid var(--ms-paint-border-shadow); /* Borde superior más fino */
+    display: flex;
+    align-items: center;
+    padding: 0 5px; /* Padding reducido */
+    color: var(--ms-paint-text-primary);
+    font-size: 0.7em; /* Fuente más pequeña */
+    gap: 10px; /* Espacio reducido */
+}
+.ms-paint-status-item {
+    padding: 1px 3px; /* Padding reducido */
+    border: none;
+    border-top: 1px solid var(--ms-paint-border-dark);
+    border-left: 1px solid var(--ms-paint-border-dark);
+    border-right: 1px solid var(--ms-paint-border-light);
+    border-bottom: 1px solid var(--ms-paint-border-light);
+    background-color: var(--ms-paint-bg-light);
+}
+
+.ms-paint-zoom-level {
+    margin-left: auto; /* Empuja el zoom a la derecha */
+    padding: 1px 3px;
+    border: none;
+    border-top: 1px solid var(--ms-paint-border-dark);
+    border-left: 1px solid var(--ms-paint-border-dark);
+    border-right: 1px solid var(--ms-paint-border-light);
+    border-bottom: 1px solid var(--ms-paint-border-light);
+    background-color: var(--ms-paint-bg-light);
+}
+
+
 /* =============================== */
-/*      SELECTOR DE FONDO          */
+/*      SELECTOR DE FONDO (PALETA DE COLORES) */
 /* =============================== */
 .background-selector {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    display: flex;
-    gap: 10px;
-    z-index: 10; /* Asegura que esté por encima del texto de demo */
+    top: 5px; /* Posición ajustada */
+    right: 5px; /* Posición ajustada */
+    display: grid;
+    grid-template-columns: repeat(9, 1fr); /* 9 columnas como la paleta de Paint */
+    gap: 1px; /* Espacio muy reducido */
+    z-index: 10;
+    border: 1px solid; /* Borde más fino */
+    border-color: var(--ms-paint-border-light) var(--ms-paint-border-dark) var(--ms-paint-border-dark) var(--ms-paint-border-light);
+    background-color: var(--ms-paint-bg-light);
+    padding: 1px; /* Padding muy reducido */
 }
 
 .bg-btn {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border: 2px solid var(--card-border);
+    width: 14px; /* Botones más pequeños */
+    height: 14px;
+    border-radius: 0;
+    border: 1px solid var(--ms-paint-border-shadow);
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: var(--bg-content); /* Fondo base para los botones */
+    transition: none;
+    background-clip: padding-box;
 }
 
 .bg-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    transform: none;
+    box-shadow: none;
+    border: 1px dashed var(--ms-paint-border-dark); /* Borde de selección discontinua */
 }
 
 .bg-btn.active {
-    transform: scale(1.15);
-    box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+    transform: none;
+    box-shadow: none;
+    border: 2px solid var(--ms-paint-titlebar-blue); /* Borde azul para activo */
 }
 
 /* =============================== */
 /*          ELEMENTOS DE FORMULARIO */
 /* =============================== */
 fieldset {
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 25px; /* Aumentado el padding */
-    margin-bottom: 30px; /* Aumentado el margen */
-    background: rgba(0, 0, 0, 0.15); /* Ligeramente más oscuro */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+    border-top: 1px solid var(--ms-paint-border-light); /* Bordes más finos */
+    border-left: 1px solid var(--ms-paint-border-light);
+    border-right: 1px solid var(--ms-paint-border-dark);
+    border-bottom: 1px solid var(--ms-paint-border-dark);
+    border-radius: 0;
+    padding: 6px; /* Padding reducido */
+    margin-bottom: 10px; /* Margen reducido */
+    background: var(--ms-paint-bg-light);
+    transition: none;
 }
 
 fieldset:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+    transform: none;
+    box-shadow: none;
 }
 
 legend {
     font-weight: var(--font-weight-bold);
-    padding: 0 15px;
-    color: var(--text-highlight);
-    font-size: 1.2em; /* Tamaño de leyenda ligeramente mayor */
+    padding: 0 2px; /* Padding reducido */
+    color: var(--ms-paint-text-primary);
+    font-size: 0.8em; /* Fuente más pequeña */
     display: flex;
     align-items: center;
-    gap: 10px; /* Espacio entre ícono y texto */
-    margin-bottom: 20px; /* Espacio debajo de la leyenda */
+    gap: 3px; /* Espacio reducido */
+    margin-bottom: 4px; /* Margen reducido */
+    background-color: var(--ms-paint-bg-light);
+    position: relative;
+    top: -7px; /* Ajuste para que la leyenda se superponga al borde */
+    left: -4px; /* Ajuste para que la leyenda se superponga al borde */
+    border: 1px solid;
+    border-color: var(--ms-paint-border-dark) var(--ms-paint-border-light) var(--ms-paint-border-light) var(--ms-paint-border-dark);
+    padding: 1px 4px; /* Padding muy reducido */
 }
 
-legend i { /* Asumiendo que se usarán íconos */
-    font-size: 1.4em;
+/* Ocultar iconos de legend para la UI de MS Paint */
+legend i {
+    display: none;
 }
 
 .control-group {
-    margin-bottom: 25px; /* Espacio entre grupos de controles */
+    margin-bottom: 6px; /* Margen reducido */
     position: relative;
 }
 
@@ -196,165 +317,190 @@ legend i { /* Asumiendo que se usarán íconos */
 .control-group:not(:last-child)::after {
     content: '';
     position: absolute;
-    bottom: -12px; /* Ajustado para centrar la línea */
+    bottom: -3px; /* Posición ajustada */
     left: 0;
     width: 100%;
     height: 1px;
-    background: var(--divider-line);
+    background: var(--ms-paint-border-dark);
 }
 
 label {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px; /* Mayor espacio entre label y control */
-    font-size: 0.95em;
-    color: var(--text-muted); /* Color más tenue para labels */
+    margin-bottom: 2px; /* Margen reducido */
+    font-size: 0.75em; /* Fuente más pequeña */
+    color: var(--ms-paint-text-primary);
 }
 
-label span:first-child { /* Contenedor para ícono y texto del label */
+/* Iconos de Font Awesome dentro de los labels, visibles */
+label span:first-child {
     display: flex;
     align-items: center;
-    gap: 10px;
-    color: var(--text-light); /* Texto del label principal más visible */
+    gap: 3px;
+    color: var(--ms-paint-text-primary);
     font-weight: var(--font-weight-bold);
 }
+label span:first-child i {
+    display: inline-block; /* Asegura que los iconos sean visibles aquí */
+    font-size: 0.8em;
+}
+
 
 /* Estilos generales para inputs */
 input[type="range"],
 input[type="color"],
 input[type="text"] {
-    border-radius: 8px;
-    border: 1px solid var(--card-border);
-    background: var(--bg-content);
-    color: var(--text-light);
-    transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
-    outline: none; /* Elimina el outline por defecto */
+    border-radius: 0;
+    border: none;
+    border-top: 1px solid var(--ms-paint-border-dark); /* Bordes más finos */
+    border-left: 1px solid var(--ms-paint-border-dark);
+    border-right: 1px solid var(--ms-paint-border-light);
+    border-bottom: 1px solid var(--ms-paint-border-light);
+    background: white;
+    color: var(--ms-paint-text-primary);
+    transition: none;
+    outline: none;
 }
 
 input[type="range"] {
     width: 100%;
-    height: 8px;
+    height: 3px; /* Pista más delgada */
     cursor: pointer;
-    -webkit-appearance: none; /* Elimina estilos por defecto en Webkit */
+    -webkit-appearance: none;
+    background: var(--ms-paint-bg-light);
+    border: 1px solid var(--ms-paint-border-dark);
 }
 
 input[type="range"]:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--ms-paint-bg-light);
 }
 
 /* Estilos para el pulgar (thumb) del slider */
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: var(--primary);
+    width: 8px; /* Pulgar más pequeño */
+    height: 8px;
+    border-radius: 0;
+    background: var(--ms-paint-bg-light);
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(106, 177, 238, 0.5);
-    margin-top: -7px; /* Centra el pulgar verticalmente */
-    transition: background 0.3s ease, transform 0.3s ease;
+    border: 1px solid var(--ms-paint-border-shadow);
+    box-shadow: none;
+    margin-top: -3px; /* Ajuste */
+    transition: none;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-    background: var(--primary-dark);
-    transform: scale(1.2);
+    background: var(--ms-paint-bg-medium);
+    transform: none;
 }
 
 input[type="color"] {
-    height: 45px;
-    padding: 0; /* Sin padding para que el color llene el input */
+    height: 16px; /* Altura reducida */
+    padding: 0;
     cursor: pointer;
-    border: none; /* Quitar border, ya que el contenedor tiene uno */
 }
 
-/* Estilos específicos para el swatch de color */
 input[type="color"]::-webkit-color-swatch-wrapper {
     padding: 0;
 }
 input[type="color"]::-webkit-color-swatch {
     border: none;
-    border-radius: 8px; /* Debe coincidir con el radio del input */
+    border-radius: 0;
 }
 
 input[type="color"]:hover {
-    transform: scale(1.02);
+    transform: none;
 }
 
 input[type="text"] {
     width: 100%;
-    padding: 12px 15px;
-    font-size: 1em; /* Ajusta el tamaño de fuente */
+    padding: 2px; /* Padding reducido */
+    font-size: 0.8em; /* Fuente más pequeña */
 }
 
 input[type="text"]:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 15px rgba(106, 177, 238, 0.3);
+    border: 1px dashed var(--ms-paint-titlebar-blue); /* Borde de foco más fino */
+    box-shadow: none;
 }
 
 .value-display {
-    color: var(--text-highlight);
+    color: var(--ms-paint-text-primary);
     font-weight: var(--font-weight-bold);
-    min-width: 60px; /* Asegura espacio suficiente */
+    min-width: 25px; /* Ancho mínimo reducido */
     text-align: right;
-    font-size: 0.9em;
+    font-size: 0.7em; /* Fuente más pequeña */
 }
 
 /* =============================== */
 /*          BOTONES DE ACCIÓN      */
 /* =============================== */
 .actions {
-    margin-top: 30px; /* Mayor espacio */
+    margin-top: 10px; /* Margen reducido */
     text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 4px; /* Espacio reducido */
 }
 
-/* Estilos para ambos botones de acción */
-#copy-css-button, #reset-button {
-    color: var(--text-light);
+/* Estilos para todos los botones - Clásico botón 3D de Windows */
+#copy-css-button, #reset-button, .preset-btn {
+    background: var(--ms-paint-bg-light);
+    color: var(--ms-paint-text-primary);
     border: none;
-    padding: 14px 25px;
-    border-radius: 8px;
+    border-top: 1px solid var(--ms-paint-border-light); /* Bordes más finos */
+    border-left: 1px solid var(--ms-paint-border-light);
+    border-right: 1px solid var(--ms-paint-border-dark);
+    border-bottom: 1px solid var(--ms-paint-border-dark);
+    padding: 3px 6px; /* Padding muy reducido */
+    border-radius: 0;
     cursor: pointer;
     font-weight: var(--font-weight-bold);
-    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    transition: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
-    font-size: 1.05em; /* Fuente un poco más grande */
+    gap: 3px;
+    font-size: 0.8em; /* Fuente más pequeña */
 }
 
-#copy-css-button {
-    background: var(--primary);
+/* Iconos en los botones, visibles */
+#copy-css-button i, #reset-button i, .preset-btn i {
+    display: inline-block;
+    font-size: 0.9em;
 }
 
-#copy-css-button:hover {
-    background: var(--primary-dark);
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+/* Estado hover/activo de los botones (efecto "presionado") */
+#copy-css-button:hover, #reset-button:hover, .preset-btn:hover {
+    background: var(--ms-paint-bg-medium);
+    border-top: 1px solid var(--ms-paint-border-dark);
+    border-left: 1px solid var(--ms-paint-border-dark);
+    border-right: 1px solid var(--ms-paint-border-light);
+    border-bottom: 1px solid var(--ms-paint-border-light);
+    transform: translateY(1px);
+    box-shadow: none;
 }
 
 #reset-button {
-    background: #e74c3c; /* Rojo para reset */
+    background: #DC3545;
+    color: white;
+    border-color: #F8B4BB #8F1B2A #8F1B2A #F8B4BB;
 }
 
 #reset-button:hover {
-    background: #c0392b;
-    transform: translateY(-3px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    background: #C0392B;
+    border-color: #8F1B2A #F8B4BB #F8B4BB #8F1B2A;
+    transform: translateY(1px);
 }
 
 /* Mensaje de copia */
 #copy-message {
-    margin-top: 10px;
-    height: 20px;
-    font-size: 0.9em;
-    color: var(--primary);
+    margin-top: 2px;
+    height: 12px; /* Altura reducida */
+    font-size: 0.7em;
+    color: var(--ms-paint-text-primary);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: none;
 }
 
 #copy-message.visible {
@@ -362,31 +508,46 @@ input[type="text"]:focus {
 }
 
 /* =============================== */
-/*        TEXTO DE DEMO GRANDE     */
+/*        TEXTO DE DEMO GRANDE ("Dulce!") */
 /* =============================== */
 .text-demo {
     width: 100%;
     text-align: center;
-    padding: 20px;
-    border-radius: 15px;
-    background: var(--bg-content);
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
-    margin-top: 20px; /* Espacio para no pegar al selector de fondo */
+    padding: 8px; /* Padding reducido */
+    border-radius: 0;
+    background: none;
+    box-shadow: none;
+    margin-top: 8px; /* Margen reducido */
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 #vanish-shadow {
-    font-size: 100px;
-    font-weight: 800;
+    font-size: 80px; /* Tamaño de fuente ajustado para pixelado grande */
+    font-weight: 800; /* Hace que los píxeles sean más gruesos */
     display: flex;
     justify-content: center;
-    color: #F8DB28; /* Amarillo */
-    -webkit-text-stroke: 3px #901F06; /* Rojo oscuro para el contorno */
-    letter-spacing: -0.25rem;
+    /* --- ESTILOS PIXELADOS NEÓN NARANJA/ROJO PARA "Dulce!" --- */
+    font-family: var(--text-font-family); /* Fuente pixelada */
+    -webkit-font-smoothing: none; /* Renderizado pixelado */
+    font-smoothing: none;
+    color: var(--dulce-text-color); /* Color base naranja */
+    /* Contorno pixelado */
+    -webkit-text-stroke: 2px var(--dulce-outline-color);
+    text-stroke: 2px var(--dulce-outline-color);
+    letter-spacing: -0.1em; /* Ajuste para espaciado pixelado */
     perspective: 500px;
-    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    border-radius: 15px;
+    /* Sombra de glow pixelada/dura */
+    text-shadow:
+        0 0 3px var(--dulce-shadow-color),
+        0 0 6px var(--dulce-shadow-color),
+        0 0 9px var(--dulce-shadow-color),
+        2px 2px 0px rgba(0,0,0,0.5); /* Sombra dura de fondo para profundidad */
     transition: all 0.5s ease;
+    padding: 0;
+    border-radius: 0;
 }
 
 #vanish-shadow .char {
@@ -396,14 +557,24 @@ input[type="text"]:focus {
 }
 
 #vanish-shadow .char:hover {
-    transform: translateY(-5px) scale(1.1);
-    text-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    transform: translateY(-3px) scale(1.05); /* Efecto hover más sutil */
+    text-shadow:
+        0 0 5px var(--dulce-shadow-color),
+        0 0 10px var(--dulce-shadow-color),
+        0 0 15px var(--dulce-shadow-color),
+        2px 2px 0px rgba(0,0,0,0.5);
 }
 
-/* Estilo para el modo arcoíris */
+/* Estilo para el modo arcoíris (ajustado para pixelado neón) */
 .rainbow-mode-active .char {
-    color: hsl(calc(var(--char-index) * 57), 80%, 60%) !important; /* Calcula el color HSL dinámicamente */
+    color: hsl(calc(var(--char-index) * 57), 100%, 70%) !important; /* Colores más saturados para neón */
     animation: rainbow-pulse 3s infinite alternate;
+    text-shadow:
+        0 0 3px currentColor,
+        0 0 6px currentColor,
+        0 0 9px currentColor,
+        2px 2px 0px rgba(0,0,0,0.5); /* Glow con el color del carácter */
+    -webkit-text-stroke: 2px rgba(0,0,0,0.5); /* Contorno oscuro */
 }
 
 @keyframes rainbow-pulse {
@@ -418,14 +589,14 @@ input[type="text"]:focus {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px; /* Espacio adicional */
+    margin-bottom: 6px; /* Margen reducido */
 }
 
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px; /* Ligeramente más ancho */
-    height: 34px; /* Ligeramente más alto */
+    width: 25px; /* Switch más pequeño y cuadrado */
+    height: 14px;
 }
 
 .switch input {
@@ -441,29 +612,32 @@ input[type="text"]:focus {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc; /* Color gris por defecto */
-    transition: .4s;
-    border-radius: 34px; /* Para que coincida con la altura */
+    background-color: var(--ms-paint-bg-medium);
+    transition: none;
+    border-radius: 0;
+    border: 1px solid var(--ms-paint-border-dark);
 }
 
 .slider:before {
     position: absolute;
     content: "";
-    height: 26px; /* Ligeramente más grande */
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
+    height: 10px; /* Pulgar cuadrado más pequeño */
+    width: 10px;
+    left: 2px;
+    bottom: 2px;
     background-color: white;
-    transition: .4s;
-    border-radius: 50%;
+    transition: none;
+    border-radius: 0;
+    border: 1px solid var(--ms-paint-border-shadow);
 }
 
 input:checked + .slider {
-    background-color: var(--primary); /* Color primario cuando está activado */
+    background-color: var(--ms-paint-statusbar-green);
+    border-color: var(--ms-paint-statusbar-green);
 }
 
 input:checked + .slider:before {
-    transform: translateX(26px); /* Mueve el pulgar a la derecha */
+    transform: translateX(11px); /* Ajuste de desplazamiento */
 }
 
 /* =============================== */
@@ -471,120 +645,157 @@ input:checked + .slider:before {
 /* =============================== */
 .preset-buttons {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
-    gap: 10px;
-    margin-top: 15px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px; /* Espacio reducido */
+    margin-top: 8px;
 }
 
-.preset-btn {
-    padding: 12px; /* Padding un poco mayor */
-    border-radius: 8px;
-    border: 1px solid var(--card-border);
-    background: var(--bg-content);
-    color: var(--text-light);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px; /* Mayor espacio entre ícono y texto */
-    font-size: 0.95em;
-}
+/* Los estilos de .preset-btn ya están definidos en los botones generales */
 
-.preset-btn:hover {
-    background: var(--primary);
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-medium); /* Añade sombra al pasar el ratón */
-}
 
 /* =============================== */
 /*        MEDIAS QUERIES (RESPONSIVE) */
 /* =============================== */
 
-/* Pantallas medianas ( Tablets y laptops pequeñas) */
 @media (max-width: 968px) {
     .container {
-        flex-direction: column; /* Apila las secciones verticalmente */
-        max-height: none; /* Permite que la altura se ajuste al contenido */
+        flex-direction: column;
+        max-height: none;
+        box-shadow: none;
+        &::before, &::after {
+            display: none; /* Ocultar barras en móvil para ahorrar espacio */
+        }
+    }
+    .container > main {
+        flex-direction: column;
     }
 
     .controls-container {
-        border-right: none; /* Elimina el borde derecho */
-        border-bottom: 1px solid var(--card-border); /* Añade borde inferior */
-        max-height: none; /* Permite que el scroll se ajuste */
-        height: auto; /* Auto altura */
-        padding-bottom: 40px; /* Más espacio al final */
+        flex: 1; /* Ocupa todo el ancho */
+        border-right: none;
+        border-bottom: 1px solid var(--ms-paint-border-shadow);
+        max-height: none;
+        height: auto;
+        padding-bottom: 10px;
     }
 
     .demo-container {
-        min-width: unset; /* Elimina el ancho mínimo para que ocupe todo el espacio */
-        padding: 30px 20px; /* Ajusta padding */
+        min-width: unset;
+        padding: 10px 5px;
+        border: none;
     }
 
     #vanish-shadow {
-        font-size: 70px; /* Reduce el tamaño de la fuente */
+        font-size: 60px;
     }
 
     .background-selector {
-        top: 15px;
-        right: 15px;
+        top: 5px;
+        right: 5px;
+        gap: 1px;
+        grid-template-columns: repeat(6, 1fr); /* Menos columnas en tablet */
+    }
+
+    .ms-paint-status-bar {
+        font-size: 0.65em;
+        height: 20px;
         gap: 8px;
     }
 }
 
-/* Pantallas pequeñas (Smartphones) */
 @media (max-width: 768px) {
     body {
-        padding: 10px; /* Reduce el padding del body */
+        padding: 2px;
     }
 
-    .container {
-        border-radius: 15px; /* Bordes ligeramente más pequeños */
-    }
-
-    .controls-container, .demo-container {
-        padding: 25px 15px; /* Reduce el padding interno */
+    fieldset {
+        padding: 4px;
+        margin-bottom: 6px;
     }
 
     legend {
-        font-size: 1.1em;
-        padding: 0 10px;
+        font-size: 0.75em;
+        top: -6px;
+        left: -4px;
+        padding: 1px 3px;
+    }
+    legend i {
+        font-size: 0.75em;
     }
 
-    #vanish-shadow {
-        font-size: 55px; /* Reduce aún más la fuente */
+    label {
+        font-size: 0.7em;
+    }
+    label span:first-child i {
+        font-size: 0.75em;
+    }
+
+    .value-display {
+        font-size: 0.65em;
+    }
+
+    input[type="text"], #copy-css-button, #reset-button, .preset-btn {
+        font-size: 0.75em;
+        padding: 2px 5px;
+    }
+    #copy-css-button i, #reset-button i, .preset-btn i {
+        font-size: 0.8em;
     }
 
     .preset-buttons {
-        grid-template-columns: 1fr; /* Una sola columna */
+        grid-template-columns: 1fr;
+        gap: 2px;
+    }
+
+    #vanish-shadow {
+        font-size: 45px;
+    }
+
+    .ms-paint-status-bar {
+        font-size: 0.6em;
+        height: 18px;
+        gap: 5px;
     }
 }
 
-/* Pantallas muy pequeñas (Smartphones más pequeños) */
 @media (max-width: 576px) {
     #vanish-shadow {
-        font-size: 40px; /* Tamaño de fuente muy pequeño */
-        letter-spacing: -0.15rem;
+        font-size: 35px;
+        letter-spacing: 0em;
+        -webkit-text-stroke: 1px var(--dulce-outline-color);
+        text-stroke: 1px var(--dulce-outline-color);
     }
-
-    .background-selector {
-        top: 10px;
-        right: 10px;
-        gap: 5px;
+    .rainbow-mode-active .char {
+        -webkit-text-stroke: 1px rgba(0,0,0,0.5);
+        text-stroke: 1px rgba(0,0,0,0.5);
     }
 
     .bg-btn {
-        width: 25px;
-        height: 25px;
+        width: 10px;
+        height: 10px;
+    }
+    .background-selector {
+        grid-template-columns: repeat(5, 1fr); /* Menos columnas en móvil */
+        padding: 0;
     }
 
-    .actions {
-        gap: 10px; /* Reduce el espacio entre botones */
+    .switch {
+        width: 20px;
+        height: 12px;
+    }
+    .slider:before {
+        height: 8px;
+        width: 8px;
+        left: 2px;
+        bottom: 2px;
+    }
+    input:checked + .slider:before {
+        transform: translateX(8px);
     }
 
-    #copy-css-button, #reset-button {
-        padding: 12px 20px;
-        font-size: 1em;
+    .tooltip::after {
+        padding: 2px 4px;
+        font-size: 0.6em;
     }
 }
 
@@ -592,88 +803,89 @@ input:checked + .slider:before {
 /*     ANIMACIONES Y EFECTOS EXTRA   */
 /* =============================== */
 
-/* Resplandor para elementos que lo necesiten (ej. texto) */
+/* Resplandor (glow) ajustado para pixelado neón */
 .glow {
-    text-shadow: 0 0 10px currentColor,
-                 0 0 20px currentColor,
-                 0 0 30px currentColor;
+    text-shadow: 0 0 3px currentColor,
+                 0 0 6px currentColor,
+                 0 0 9px currentColor,
+                 1px 1px 0px rgba(0,0,0,0.5); /* Sombra dura de fondo */
 }
 
-/* Animación de flotación */
+/* Animación de flotación - Mantiene estilo original */
 .float-animation {
     animation: float 6s ease-in-out infinite;
 }
 
 @keyframes float {
     0% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); } /* Movimiento vertical reducido */
+    50% { transform: translateY(-15px); }
     100% { transform: translateY(0px); }
 }
 
-/* Partículas de fondo */
+/* Partículas de fondo - Estilo original */
 .particles {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Permite que los clicks pasen a través de las partículas */
-    z-index: -1; /* Las partículas van detrás del contenido */
+    pointer-events: none;
+    z-index: -1;
 }
 
 .particle {
     position: absolute;
-    background: var(--primary);
+    background: var(--primary); /* Usar el color primario original */
     border-radius: 50%;
-    opacity: 0.3; /* Opacidad baja */
-    animation: particle-float 20s infinite linear; /* Animación más larga y suave */
-    filter: blur(2px); /* Suaviza las partículas */
+    opacity: 0.3;
+    animation: particle-float 20s infinite linear;
+    filter: blur(2px);
 }
 
 @keyframes particle-float {
     0% {
         transform: translateY(0) translateX(0) rotate(0deg);
         opacity: 0;
-        scale: 0.5; /* Empieza más pequeño */
+        scale: 0.5;
     }
     10% {
         opacity: 0.4;
-        scale: 1; /* Alcanza tamaño normal */
+        scale: 1;
     }
     80% {
         opacity: 0.3;
-        transform: translateY(-100vh) translateX(calc(random() * 200px - 100px)) rotate(720deg); /* Movimiento más errático y rotación */
+        transform: translateY(-100vh) translateX(calc(random() * 200px - 100px)) rotate(720deg);
     }
     100% {
         transform: translateY(-120vh) translateX(calc(random() * 200px - 100px)) rotate(720deg);
         opacity: 0;
-        scale: 1.5; /* Termina más grande */
+        scale: 1.5;
     }
 }
 
-/* Estilos de Tooltip */
+/* Estilos de Tooltip - Retro */
 .tooltip {
     position: relative;
     cursor: help;
 }
 
 .tooltip::after {
-    content: attr(data-tooltip); /* Obtiene el texto del atributo data-tooltip */
+    content: attr(data-tooltip);
     position: absolute;
-    bottom: 125%; /* Posiciona encima del elemento */
+    bottom: 125%;
     left: 50%;
-    transform: translateX(-50%); /* Centra el tooltip */
-    padding: 8px 12px;
-    background: rgba(0, 0, 0, 0.85); /* Fondo oscuro para el tooltip */
-    color: white;
-    border-radius: 5px;
-    font-size: 12px;
-    white-space: nowrap; /* Evita que el texto se rompa */
+    transform: translateX(-50%);
+    padding: 3px 6px; /* Padding reducido */
+    background: var(--ms-paint-border-shadow);
+    color: var(--ms-paint-border-light);
+    border-radius: 0;
+    font-size: 0.7em; /* Fuente más pequeña */
+    white-space: nowrap;
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     z-index: 100;
-    pointer-events: none; /* Evita que el tooltip interfiera con interacciones */
+    pointer-events: none;
 }
 
 .tooltip:hover::after {
