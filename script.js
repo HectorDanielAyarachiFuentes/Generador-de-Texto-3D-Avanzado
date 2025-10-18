@@ -3,11 +3,12 @@
 // ========================================
 
 import { config, presets, initialConfig } from './js/config.js';
-import { form, undoBtn, redoBtn } from './js/dom.js';
+import { form, undoBtn, redoBtn, demoContainer } from './js/dom.js';
 import { pushState, undo, redo, initHistory } from './js/history.js';
 import { updateTextDisplay, applyStyles } from './js/effects.js';
 import { updateFormFromConfig, generateAndCopyHtml, handleReset, handleRandomize, setupPresetButtons, setupBackgroundButtons } from './js/handlers.js';
 import { createParticles } from './js/particles.js';
+import { saveStateToLocalStorage, loadStateFromLocalStorage } from './js/localstorage.js';
 
 // Variables para la lógica del script
 let debounceTimer; // Para controlar la frecuencia de actualización de estilos
@@ -95,6 +96,7 @@ form.addEventListener('input', (e) => {
     debounceTimer = setTimeout(() => {
         readConfigFromForm();
         updateTextDisplay(); // Recrea los spans si el texto cambia y aplica estilos
+        saveStateToLocalStorage(config); // Guarda el estado en tiempo real
     }, 10); // Un pequeño delay para que la lectura del config sea consistente
 });
 
@@ -102,6 +104,7 @@ form.addEventListener('input', (e) => {
 form.addEventListener('change', () => {
     readConfigFromForm();
     pushState(config);
+    saveStateToLocalStorage(config);
 });
 
 
@@ -152,6 +155,14 @@ accordionItems.forEach(item => {
 
 // Ejecuta las funciones de inicialización una vez que el DOM está listo
 document.addEventListener('DOMContentLoaded', () => {
+    const savedState = loadStateFromLocalStorage();
+    if (savedState) {
+        Object.assign(config, savedState);
+        Object.assign(initialConfig, savedState);
+    }
+
+    demoContainer.style.background = config.backgroundColor;
+
     createParticles(); // Crea las partículas de fondo
     initHistory(initialConfig); // Inicializa el historial con el estado inicial
     applyRandomHeaderStyle(); // Aplica un estilo aleatorio al título de la app

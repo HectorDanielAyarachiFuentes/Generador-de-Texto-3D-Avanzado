@@ -3,6 +3,7 @@ import { form, presetButtons, bgButtons, copyMsg, demoContainer, textColorInput 
 import { getRandom } from './utils.js';
 import { applyStyles, charSpans } from './effects.js';
 import { pushState } from './history.js';
+import { saveStateToLocalStorage } from './localstorage.js';
 
 // ========================================
 //  MANEJADORES DE EVENTOS
@@ -179,6 +180,7 @@ export function handleReset() {
     updateFormFromConfig(); // Actualiza los elementos del formulario
     pushState(config); // Guarda el estado de reseteo en el historial
     applyStyles(); // Reaplica los estilos
+    saveStateToLocalStorage(config);
 }
 
 /**
@@ -241,6 +243,7 @@ export function handleRandomize() {
     updateFormFromConfig(); // Refleja los nuevos valores en el formulario
     pushState(config); // Guarda el estado aleatorio en el historial
     applyStyles(); // Aplica los nuevos estilos
+    saveStateToLocalStorage(config);
 }
 
 // Manejar clics en botones de preset
@@ -254,6 +257,7 @@ export function setupPresetButtons() {
                 pushState(config); // Guarda el estado del preset en el historial
                 updateFormFromConfig(); // Actualiza el formulario
                 applyStyles(); // Reaplica los estilos
+                saveStateToLocalStorage(config);
             }
         });
     });
@@ -268,7 +272,10 @@ export function setupBackgroundButtons() {
             // Añade la clase 'active' al botón clicado
             btn.classList.add('active');
             // Aplica el gradiente de fondo al contenedor de demo
-            demoContainer.style.background = btn.dataset.bg;
+            const newBg = btn.dataset.bg;
+            demoContainer.style.background = newBg;
+            config.backgroundColor = newBg;
+            saveStateToLocalStorage(config);
         });
     });
 }

@@ -18,7 +18,8 @@ export const initialConfig = {
     depthIntensity: 5,
     glowEffect: false,
     floatAnimation: false,
-    animationSpeed: 6
+    animationSpeed: 6,
+    backgroundColor: '#000000'
 };
 
 // Presets para los botones rápidos
