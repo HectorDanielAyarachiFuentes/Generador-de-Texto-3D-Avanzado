@@ -4,6 +4,7 @@ export const shadowHost = document.getElementById('vanish-shadow');
 export const demoContainer = document.getElementById('demo-container');
 export const copyBtn = document.getElementById('copy-css-button');
 export const resetBtn = document.getElementById('reset-button');
+export const exportPngBtn = document.getElementById('export-png-button');
 export const undoBtn = document.getElementById('undo-button');
 export const redoBtn = document.getElementById('redo-button');
 export const randomBtn = document.getElementById('random-button');

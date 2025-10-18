@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Favicon SVG de paleta de pintura -->
     <link rel="icon" type="image/svg+xml" href="img-favicon\paint-svgrepo-com.svg">
+    <!-- Librería para exportar a PNG -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <!-- Enlace a tu archivo CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -209,6 +211,7 @@
                 <!-- Botones de Acción (se quedan en el panel izquierdo) -->
                 <div class="actions">
                     <button id="copy-css-button"><i class="fas fa-copy"></i> Copiar HTML Completo</button>
+                    <button id="export-png-button"><i class="fas fa-file-image"></i> Exportar como PNG</button>
                     <button id="undo-button" disabled><i class="fas fa-undo"></i> Deshacer (Ctrl+Z)</button>
                     <button id="redo-button" disabled><i class="fas fa-redo"></i> Rehacer (Ctrl+Y)</button>
                     <button id="reset-button"><i class="fas fa-redo"></i> Restablecer Configuración</button>
