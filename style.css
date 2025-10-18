@@ -232,10 +232,10 @@ body {
 /*         NUEVO PANEL DERECHO (Marcador)      */
 /* =============================== */
 .right-panel {
-    flex: 0 0 150px; /* Ancho fijo para el panel derecho (aumentado) */
+    flex: 0 0 200px; /* Ancho fijo para el panel derecho (aumentado para mejor UX) */
     background: var(--ms-paint-bg-light);
     border-left: 1px solid var(--ms-paint-border-shadow); /* Borde separador */
-    overflow-y: auto;
+    overflow-x: hidden; /* Evita el scroll horizontal no deseado */
     display: flex;
     flex-direction: column;
 }
@@ -701,12 +701,11 @@ input:checked + .slider:before {
 
 .right-panel .preset-buttons.tool-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columnas para aprovechar el nuevo ancho */
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas para que encaje mejor en altura */
     gap: 3px; /* Pequeño espacio entre iconos */
     margin-top: 5px;
     padding-bottom: 8px; /* Espacio debajo de la cuadrícula */
     border-bottom: 1px solid var(--ms-paint-border-dark); /* Línea divisoria */
-    margin-bottom: 8px;
 }
 
 .right-panel .preset-buttons.tool-grid .preset-btn {
@@ -740,6 +739,116 @@ input:checked + .slider:before {
     border-right: 1px solid var(--ms-paint-border-light);
     border-bottom: 1px solid var(--ms-paint-border-light);
     transform: none; /* No animar en hover */
+}
+
+/* =============================== */
+/*        GIZMO 3D (Panel Derecho)   */
+/* =============================== */
+
+.gizmo-container {
+    width: 100px;
+    height: 100px;
+    perspective: 1000px;
+    margin: auto; /* Centrar en el espacio disponible */
+    margin-top: 15px; /* Espacio superior */
+}
+
+.gizmo {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: spin 12s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+    to {
+        transform: rotateX(360deg) rotateY(360deg);
+    }
+}
+
+.axis {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+.axis.x {
+    width: 80px;
+    height: 2px;
+    background: #E74C3C; /* Rojo */
+    transform: translate(-50%, -50%);
+}
+
+.axis.y {
+    width: 2px;
+    height: 80px;
+    background: #2ECC71; /* Verde */
+    transform: translate(-50%, -50%);
+}
+
+.axis.z {
+    width: 2px;
+    height: 80px;
+    background: #3498DB; /* Azul */
+    transform: translate(-50%, -50%) rotateX(90deg);
+}
+
+.axis::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+}
+
+.axis.x::after {
+    border-width: 4px 0 4px 8px;
+    border-color: transparent transparent transparent #E74C3C;
+    right: -8px;
+    top: -3px;
+}
+
+.axis.y::after {
+    border-width: 0 4px 8px 4px;
+    border-color: transparent transparent #2ECC71 transparent;
+    top: -8px;
+    left: -3px;
+}
+
+.axis.z::after {
+    border-width: 0 4px 8px 4px;
+    border-color: transparent transparent #3498DB transparent;
+    top: -8px;
+    left: -3px;
+}
+
+.ring {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: 2px solid;
+    top: 50%;
+    left: 50%;
+}
+
+.ring.x {
+    border-color: #E74C3C; /* Rojo */
+    transform: translate(-50%, -50%) rotateX(90deg);
+}
+
+.ring.y {
+    border-color: #2ECC71; /* Verde */
+    transform: translate(-50%, -50%);
+}
+
+.ring.z {
+    border-color: #3498DB; /* Azul */
+    transform: translate(-50%, -50%) rotateY(90deg);
 }
 
 
