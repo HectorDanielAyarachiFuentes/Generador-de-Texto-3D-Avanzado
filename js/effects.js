@@ -137,15 +137,19 @@ function generateFadingShadow(angle, length, colorHex, blurBase, addGlow) {
         const angleRad = (angle * Math.PI) / 180;
         const xDir = Math.cos(angleRad);
         const yDir = Math.sin(angleRad);
-        const steps = Math.min(Math.ceil(length), 80); // Genera hasta 80 "capas" de sombra
+
+        // OPTIMIZACIÓN: Usar un número de pasos fijo y más bajo, y saltar a través de la longitud.
+        // Esto reduce drásticamente el número de capas de sombra generadas para un mejor rendimiento.
+        const steps = Math.max(10, Math.min(20, Math.ceil(length / 5))); // Entre 10 y 20 pasos.
+        const stepIncrement = length / steps; // Distancia que salta cada paso.
 
         for (let i = 1; i <= steps; i++) {
-            const progress = i / steps; // Progreso de la sombra (0 a 1)
-            const currentLength = progress * length;
+            const currentLength = i * stepIncrement;
+            const progress = currentLength / length; // Progreso de la sombra (0 a 1)
             const x = (currentLength * xDir).toFixed(2);
             const y = (currentLength * yDir).toFixed(2);
             // La opacidad disminuye a medida que la sombra se aleja
-            const opacity = (0.6 * (1 - progress * 0.9)).toFixed(3); // Empieza con opacidad más alta
+            const opacity = (0.5 * (1 - progress * 0.8)).toFixed(3);
             // El desenfoque aumenta con la distancia
             const blur = (progress * blurBase).toFixed(2);
             shadowParts.push(`${x}px ${y}px ${blur}px rgba(${r},${g},${b},${opacity})`);

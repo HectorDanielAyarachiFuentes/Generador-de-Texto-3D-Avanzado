@@ -2,8 +2,9 @@
 //  MAIN ENTRY POINT - MODULAR SCRIPT
 // ========================================
 
-import { config, presets } from './js/config.js';
-import { form } from './js/dom.js';
+import { config, presets, initialConfig } from './js/config.js';
+import { form, undoBtn, redoBtn } from './js/dom.js';
+import { pushState, undo, redo, initHistory } from './js/history.js';
 import { updateTextDisplay, applyStyles } from './js/effects.js';
 import { updateFormFromConfig, generateAndCopyHtml, handleReset, handleRandomize, setupPresetButtons, setupBackgroundButtons } from './js/handlers.js';
 import { createParticles } from './js/particles.js';
@@ -97,6 +98,13 @@ form.addEventListener('input', (e) => {
     }, 10); // Un pequeño delay para que la lectura del config sea consistente
 });
 
+// Guardar estado en el historial cuando un cambio es "confirmado" por el usuario
+form.addEventListener('change', () => {
+    readConfigFromForm();
+    pushState(config);
+});
+
+
 // Manejar clic en botón de copiar
 document.getElementById('copy-css-button').addEventListener('click', generateAndCopyHtml);
 
@@ -104,6 +112,21 @@ document.getElementById('copy-css-button').addEventListener('click', generateAnd
 document.getElementById('reset-button').addEventListener('click', handleReset);
 
 // Manejar clic en botón de aleatorio
+undoBtn.addEventListener('click', undo);
+redoBtn.addEventListener('click', redo);
+
+// Atajos de teclado para deshacer/rehacer
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.key.toLowerCase() === 'z') {
+        e.preventDefault();
+        undo();
+    }
+    if (e.ctrlKey && e.key.toLowerCase() === 'y') {
+        e.preventDefault();
+        redo();
+    }
+});
+
 const randomBtn = document.getElementById('random-button');
 if (randomBtn) { // Asegurarse de que el botón existe antes de añadir el listener
     randomBtn.addEventListener('click', handleRandomize);
@@ -130,6 +153,7 @@ accordionItems.forEach(item => {
 // Ejecuta las funciones de inicialización una vez que el DOM está listo
 document.addEventListener('DOMContentLoaded', () => {
     createParticles(); // Crea las partículas de fondo
+    initHistory(initialConfig); // Inicializa el historial con el estado inicial
     applyRandomHeaderStyle(); // Aplica un estilo aleatorio al título de la app
     setupPresetButtons(); // Configura botones de preset
     setupBackgroundButtons(); // Configura botones de fondo

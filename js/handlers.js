@@ -2,6 +2,7 @@ import { config, presets, initialConfig } from './config.js';
 import { form, presetButtons, bgButtons, copyMsg, demoContainer, textColorInput } from './dom.js';
 import { getRandom } from './utils.js';
 import { applyStyles, charSpans } from './effects.js';
+import { pushState } from './history.js';
 
 // ========================================
 //  MANEJADORES DE EVENTOS
@@ -176,6 +177,7 @@ export function generateAndCopyHtml() {
 export function handleReset() {
     Object.assign(config, { ...initialConfig }); // Copia los valores iniciales
     updateFormFromConfig(); // Actualiza los elementos del formulario
+    pushState(config); // Guarda el estado de reseteo en el historial
     applyStyles(); // Reaplica los estilos
 }
 
@@ -237,6 +239,7 @@ export function handleRandomize() {
 
     Object.assign(config, newConfig); // Actualiza la configuración global
     updateFormFromConfig(); // Refleja los nuevos valores en el formulario
+    pushState(config); // Guarda el estado aleatorio en el historial
     applyStyles(); // Aplica los nuevos estilos
 }
 
@@ -248,6 +251,7 @@ export function setupPresetButtons() {
             if (presets[presetName]) {
                 // Fusiona la configuración del preset con la configuración actual
                 Object.assign(config, presets[presetName]);
+                pushState(config); // Guarda el estado del preset en el historial
                 updateFormFromConfig(); // Actualiza el formulario
                 applyStyles(); // Reaplica los estilos
             }

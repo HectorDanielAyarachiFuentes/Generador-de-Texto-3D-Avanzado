@@ -486,7 +486,7 @@ input[type="text"]:focus {
 }
 
 /* Estilos para todos los botones - Clásico botón 3D de Windows */
-#copy-css-button, #reset-button, .preset-btn {
+#copy-css-button, #reset-button, .preset-btn, #undo-button, #redo-button {
     background: var(--ms-paint-bg-light);
     color: var(--ms-paint-text-primary);
     border: none;
@@ -507,13 +507,13 @@ input[type="text"]:focus {
 }
 
 /* Iconos en los botones, visibles */
-#copy-css-button i, #reset-button i, .preset-btn i {
+#copy-css-button i, #reset-button i, .preset-btn i, #undo-button i, #redo-button i {
     display: inline-block;
     font-size: 0.9em;
 }
 
 /* Estado hover/activo de los botones (efecto "presionado") */
-#copy-css-button:hover, #reset-button:hover, .preset-btn:hover {
+#copy-css-button:hover, #reset-button:hover, .preset-btn:hover, #undo-button:hover, #redo-button:hover {
     background: var(--ms-paint-bg-medium);
     border-top: 1px solid var(--ms-paint-border-dark);
     border-left: 1px solid var(--ms-paint-border-dark);
@@ -523,6 +523,14 @@ input[type="text"]:focus {
     box-shadow: none;
 }
 
+/* Estilo para botones deshabilitados */
+#undo-button:disabled, #redo-button:disabled {
+    color: var(--ms-paint-text-secondary);
+    background: var(--ms-paint-bg-light);
+    border-color: var(--ms-paint-border-light) var(--ms-paint-border-dark) var(--ms-paint-border-dark) var(--ms-paint-border-light);
+    cursor: not-allowed;
+    transform: none;
+}
 #reset-button {
     background: #DC3545;
     color: white;
