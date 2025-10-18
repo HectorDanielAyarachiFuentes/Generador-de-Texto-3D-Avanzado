@@ -277,6 +277,7 @@ body {
     border: 1px solid var(--ms-paint-border-shadow);
     cursor: pointer;
     transition: none;
+    position: relative; /* Necesario para que el tooltip se posicione correctamente */
     background-clip: padding-box;
 }
 
