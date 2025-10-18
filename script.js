@@ -2,7 +2,7 @@
 //  MAIN ENTRY POINT - MODULAR SCRIPT
 // ========================================
 
-import { config } from './js/config.js';
+import { config, presets } from './js/config.js';
 import { form } from './js/dom.js';
 import { updateTextDisplay, applyStyles } from './js/effects.js';
 import { updateFormFromConfig, generateAndCopyHtml, handleReset, handleRandomize, setupPresetButtons, setupBackgroundButtons } from './js/handlers.js';
@@ -35,12 +35,48 @@ function readConfigFromForm() {
     config.animationSpeed = parseInt(form.elements.animationSpeed.value);
 }
 
+/**
+ * Aplica un estilo aleatorio al H1 de la cabecera para hacerlo más dinámico.
+ */
+function applyRandomHeaderStyle() {
+    const headerH1 = document.querySelector('.app-header h1');
+    if (!headerH1) return;
+
+    // Elige un preset aleatorio de la lista de presets
+    const presetKeys = Object.keys(presets);
+    const randomPresetKey = presetKeys[Math.floor(Math.random() * presetKeys.length)];
+    const randomPreset = presets[randomPresetKey];
+
+    // Clona la configuración del preset para no modificar la original
+    const headerConfig = { ...config, ...randomPreset };
+    headerConfig.text = "Generador 3D"; // Fija el texto
+
+    // Crea los spans para el título
+    headerH1.innerHTML = '';
+    const charSpans = [];
+    headerConfig.text.split('').forEach((char, index) => {
+        const span = document.createElement('span');
+        span.className = 'char';
+        span.innerHTML = char === ' ' ? '&nbsp;' : char;
+        span.style.setProperty('--char-index', index);
+        headerH1.appendChild(span);
+        charSpans.push(span);
+    });
+
+    // Aplica los estilos directamente a los spans del header
+    headerH1.style.color = headerConfig.rainbowMode ? '' : headerConfig.textColor;
+    headerH1.style.webkitTextStroke = `${headerConfig.outlineWidth}px ${headerConfig.outlineColor}`;
+    headerH1.style.letterSpacing = `${headerConfig.letterSpacing}rem`;
+    headerH1.classList.toggle('rainbow-mode-active', headerConfig.rainbowMode);
+    headerH1.classList.toggle('glow', headerConfig.glowEffect);
+}
+
 // ========================================
 //  MANEJADORES DE EVENTOS
 // ========================================
 
 // Actualiza estilos cada vez que cambia un control del formulario (con debounce)
-form.addEventListener('input', () => {
+form.addEventListener('input', (e) => {
     // Actualiza el valor numérico del slider en tiempo real
     if (e.target.type === 'range') {
         const valueDisplay = document.getElementById(`${e.target.id}-value`);
@@ -94,6 +130,7 @@ accordionItems.forEach(item => {
 // Ejecuta las funciones de inicialización una vez que el DOM está listo
 document.addEventListener('DOMContentLoaded', () => {
     createParticles(); // Crea las partículas de fondo
+    applyRandomHeaderStyle(); // Aplica un estilo aleatorio al título de la app
     setupPresetButtons(); // Configura botones de preset
     setupBackgroundButtons(); // Configura botones de fondo
     updateFormFromConfig(); // Carga los valores iniciales en el formulario

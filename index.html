@@ -34,18 +34,18 @@
                 <form id="controls-form" onsubmit="return false;">
                     <!-- Fieldset: Texto y Estilo -->
                     <fieldset class="accordion-item active">
-                        <legend class="accordion-header">Texto y Estilo</legend>
+                        <legend class="accordion-header"><i class="fas fa-pencil-alt"></i>Texto y Estilo</legend>
                         <div class="accordion-content">
                         <div class="control-group text-input">
                             <label for="text-input">
-                                <span>Texto</span>
+                                <span><i class="fas fa-keyboard"></i>Texto</span>
                             </label>
                             <input type="text" id="text-input" name="text" value="Dulce!">
                         </div>
 
                         <div class="control-group switch-group">
                             <label for="rainbow-toggle">
-                                <span>Color Arcoíris</span>
+                                <span><i class="fas fa-rainbow"></i>Color Arcoíris</span>
                                 <div class="switch">
                                     <input type="checkbox" id="rainbow-toggle" name="rainbowMode">
                                     <span class="slider"></span>
@@ -55,21 +55,21 @@
 
                         <div class="control-group">
                             <label for="text-color">
-                                <span>Color de Texto</span>
+                                <span><i class="fas fa-palette"></i>Color de Texto</span>
                             </label>
                             <input type="color" id="text-color" name="textColor" value="#FF8C00">
                         </div>
 
                         <div class="control-group">
                             <label for="outline-color">
-                                <span>Color de Borde</span>
+                                <span><i class="fas fa-highlighter"></i>Color de Borde</span>
                             </label>
                             <input type="color" id="outline-color" name="outlineColor" value="#8B0000">
                         </div>
 
                         <div class="control-group">
                             <label for="letter-spacing">
-                                <span>Espaciado</span>
+                                <span><i class="fas fa-text-width"></i>Espaciado</span>
                                 <span class="value-display"><span id="letter-spacing-value">-0.25</span><span data-unit="rem">rem</span></span>
                             </label>
                             <input type="range" id="letter-spacing" name="letterSpacing" min="-0.5" max="0.5"
@@ -78,7 +78,7 @@
 
                         <div class="control-group">
                             <label for="outline-width">
-                                <span>Grosor de Borde</span>
+                                <span><i class="fas fa-border-style"></i>Grosor de Borde</span>
                                 <span class="value-display"><span id="outline-width-value">2</span><span data-unit="px">px</span></span>
                             </label>
                             <input type="range" id="outline-width" name="outlineWidth" min="0" max="10" value="2"
@@ -89,18 +89,18 @@
 
                     <!-- Fieldset: Sombra -->
                     <fieldset class="accordion-item">
-                        <legend class="accordion-header">Sombra</legend>
+                        <legend class="accordion-header"><i class="fas fa-layer-group"></i>Sombra</legend>
                         <div class="accordion-content">
                         <div class="control-group">
                             <label for="shadow-color">
-                                <span>Color de Sombra</span>
+                                <span><i class="fas fa-fill-drip"></i>Color de Sombra</span>
                             </label>
                             <input type="color" id="shadow-color" name="shadowColor" value="#000000">
                         </div>
 
                         <div class="control-group">
                             <label for="shadow-length">
-                                <span>Longitud</span>
+                                <span><i class="fas fa-ruler-horizontal"></i>Longitud</span>
                                 <span class="value-display"><span id="shadow-length-value">0</span><span data-unit="px">px</span></span>
                             </label>
                             <input type="range" id="shadow-length" name="shadowLength" min="0" max="200" value="0">
@@ -108,7 +108,7 @@
 
                         <div class="control-group">
                             <label for="shadow-blur">
-                                <span>Desenfoque</span>
+                                <span><i class="fas fa-eye-dropper"></i>Desenfoque</span>
                                 <span class="value-display"><span id="shadow-blur-value">0</span><span data-unit="px">px</span></span>
                             </label>
                             <input type="range" id="shadow-blur" name="shadowBlur" min="0" max="50" value="0"
@@ -117,7 +117,7 @@
 
                         <div class="control-group">
                             <label for="start-angle">
-                                <span class="tooltip" data-tooltip="Ángulo de la sombra en la primera letra">Ángulo
+                                <span class="tooltip" data-tooltip="Ángulo de la sombra en la primera letra"><i class="fas fa-angle-double-right"></i>Ángulo
                                     Inicial</span>
                                 <span class="value-display"><span id="start-angle-value">0</span><span data-unit="°">°</span></span>
                             </label>
@@ -126,7 +126,7 @@
 
                         <div class="control-group">
                             <label for="end-angle">
-                                <span class="tooltip" data-tooltip="Ángulo de la sombra en la última letra">Ángulo
+                                <span class="tooltip" data-tooltip="Ángulo de la sombra en la última letra"><i class="fas fa-angle-double-left"></i>Ángulo
                                     Final</span>
                                 <span class="value-display"><span id="end-angle-value">0</span><span data-unit="°">°</span></span>
                             </label>
@@ -137,11 +137,11 @@
 
                     <!-- Fieldset: Efecto 3D -->
                     <fieldset class="accordion-item">
-                        <legend class="accordion-header">Efecto 3D</legend>
+                        <legend class="accordion-header"><i class="fas fa-cube"></i>Efecto 3D</legend>
                         <div class="accordion-content">
                         <div class="control-group">
                             <label for="perspective-arc">
-                                <span class="tooltip" data-tooltip="Crea un arco vertical con el texto">Curvatura</span>
+                                <span class="tooltip" data-tooltip="Crea un arco vertical con el texto"><i class="fas fa-archway"></i>Curvatura</span>
                                 <span class="value-display"><span id="perspective-arc-value">0</span><span data-unit=""></span></span>
                             </label>
                             <input type="range" id="perspective-arc" name="perspectiveArc" min="-150" max="150"
@@ -150,7 +150,7 @@
 
                         <div class="control-group">
                             <label for="perspective-rotate">
-                                <span class="tooltip" data-tooltip="Rota las letras hacia los lados">Rotación</span>
+                                <span class="tooltip" data-tooltip="Rota las letras hacia los lados"><i class="fas fa-sync-alt"></i>Rotación</span>
                                 <span class="value-display"><span id="perspective-rotate-value">0</span><span data-unit="°">°</span></span>
                             </label>
                             <input type="range" id="perspective-rotate" name="perspectiveRotate" min="-90" max="90"
@@ -160,7 +160,7 @@
                         <div class="control-group">
                             <label for="depth-intensity">
                                 <span class="tooltip"
-                                    data-tooltip="Aleja las letras de los extremos para dar profundidad">Intensidad
+                                    data-tooltip="Aleja las letras de los extremos para dar profundidad"><i class="fas fa-compress-arrows-alt"></i>Intensidad
                                     3D</span>
                                 <span class="value-display"><span id="depth-intensity-value">7</span><span data-unit=""></span></span>
                             </label>
@@ -171,11 +171,11 @@
 
                     <!-- Fieldset: Efectos Especiales -->
                     <fieldset class="accordion-item">
-                        <legend class="accordion-header">Efectos Especiales</legend>
+                        <legend class="accordion-header"><i class="fas fa-wand-magic-sparkles"></i>Efectos Especiales</legend>
                         <div class="accordion-content">
                         <div class="control-group switch-group">
                             <label for="glow-effect">
-                                <span>Efecto de Resplandor</span>
+                                <span><i class="fas fa-lightbulb"></i>Efecto de Resplandor</span>
                                 <div class="switch">
                                     <input type="checkbox" id="glow-effect" name="glowEffect" checked>
                                     <span class="slider"></span>
@@ -185,7 +185,7 @@
 
                         <div class="control-group switch-group">
                             <label for="float-animation">
-                                <span>Animación Flotante</span>
+                                <span><i class="fas fa-feather-alt"></i>Animación Flotante</span>
                                 <div class="switch">
                                     <input type="checkbox" id="float-animation" name="floatAnimation">
                                     <span class="slider"></span>
@@ -195,7 +195,7 @@
 
                         <div class="control-group">
                             <label for="animation-speed">
-                                <span>Velocidad Animación</span>
+                                <span><i class="fas fa-tachometer-alt"></i>Velocidad Animación</span>
                                 <span class="value-display"><span id="animation-speed-value">6</span><span data-unit="s">s</span></span>
                             </label>
                             <input type="range" id="animation-speed" name="animationSpeed" min="1" max="15" value="6">

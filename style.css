@@ -148,27 +148,35 @@ body {
     scrollbar-color: var(--ms-paint-bg-dark) var(--ms-paint-bg-medium);
 }
 
-/* Estilos del scrollbar para Webkit (Chrome, Safari) */
-.controls-container::-webkit-scrollbar {
-    width: 6px; /* Scrollbar más delgado */
-}
-.controls-container::-webkit-scrollbar-track {
-    background: var(--ms-paint-bg-medium);
-    border-radius: 0;
-}
-.controls-container::-webkit-scrollbar-thumb {
-    background: var(--ms-paint-bg-dark);
-    border-radius: 0;
-    border: 1px solid var(--ms-paint-border-shadow);
-    transition: none;
-}
-.controls-container::-webkit-scrollbar-thumb:hover {
-    background: var(--ms-paint-bg-dark);
+/* Estilos para el nuevo Header de la App - AHORA CON ESTILO MS PAINT */
+.app-header {
+    text-align: center;
+    margin-bottom: 1rem; /* Margen ajustado */
+    padding: 10px 5px;
+    background: var(--ms-paint-bg-light);
+    /* Borde 3D "hundido" clásico */
+    border: 1px solid;
+    border-color: var(--ms-paint-border-dark) var(--ms-paint-border-light) var(--ms-paint-border-light) var(--ms-paint-border-dark);
+    position: relative;
 }
 
-/* =============================== */
-/*         CONTENEDOR DE DEMO (Panel central)      */
-/* =============================== */
+.app-header h1 {
+    margin: 0 0 5px 0;
+    font-size: 1.5rem; /* Tamaño ajustado para el panel */
+    font-family: var(--text-font-family); /* Usa la fuente de texto principal */
+    -webkit-font-smoothing: none;
+    font-smoothing: none;
+    display: flex; /* Necesario para los spans de caracteres */
+    justify-content: center;
+    min-height: 30px; /* Evita saltos de layout mientras se carga */
+}
+
+.app-header p {
+    margin: 0;
+    color: var(--ms-paint-text-secondary);
+    font-size: 0.75em;
+}
+
 .demo-container {
     flex: 1; /* Ocupa el resto del espacio */
     min-width: 300px; /* Ancho mínimo para el demo */
@@ -377,7 +385,7 @@ label span:first-child {
 }
 label span:first-child i {
     display: inline-block; /* Asegura que los iconos sean visibles aquí */
-    font-size: 0.8em;
+    font-size: 1em; /* Iconos un poco más grandes para mayor claridad */
 }
 
 
