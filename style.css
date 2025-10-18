@@ -275,7 +275,7 @@ body {
     padding: 1px;
     width: fit-content; /* Ajustar el ancho a su contenido */
     margin: 0 auto; /* Centrar la paleta */
-    margin-bottom: 5px;
+    margin-bottom: 8px; /* Aumentar margen inferior para separar de los botones de acción */
 }
 
 .bg-btn {
