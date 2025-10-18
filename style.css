@@ -224,7 +224,7 @@ body {
 /*         NUEVO PANEL DERECHO (Marcador)      */
 /* =============================== */
 .right-panel {
-    flex: 0 0 100px; /* Ancho fijo para el panel derecho */
+    flex: 0 0 150px; /* Ancho fijo para el panel derecho (aumentado) */
     background: var(--ms-paint-bg-light);
     border-left: 1px solid var(--ms-paint-border-shadow); /* Borde separador */
     overflow-y: auto;
@@ -246,43 +246,6 @@ body {
 .right-panel .panel-content {
     padding: 5px;
     flex-grow: 1; /* Permite que el contenido se expanda */
-}
-
-/* Estilos para "Seleccionar" y "Recortar" */
-.right-panel .tool-actions-row {
-    display: flex;
-    gap: 2px;
-    margin-bottom: 8px;
-}
-
-.right-panel .tool-action-btn {
-    flex: 1; /* Para que compartan el espacio horizontal */
-    background: var(--ms-paint-bg-light);
-    color: var(--ms-paint-text-primary);
-    border: none;
-    border-top: 1px solid var(--ms-paint-border-light);
-    border-left: 1px solid var(--ms-paint-border-light);
-    border-right: 1px solid var(--ms-paint-border-dark);
-    border-bottom: 1px solid var(--ms-paint-border-dark);
-    padding: 2px 4px;
-    border-radius: 0;
-    cursor: pointer;
-    font-size: 0.7em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-}
-.right-panel .tool-action-btn i {
-    font-size: 0.9em;
-}
-.right-panel .tool-action-btn:hover {
-    background: var(--ms-paint-bg-medium);
-    border-top: 1px solid var(--ms-paint-border-dark);
-    border-left: 1px solid var(--ms-paint-border-dark);
-    border-right: 1px solid var(--ms-paint-border-light);
-    border-bottom: 1px solid var(--ms-paint-border-light);
-    transform: none; /* No animar estos botones */
 }
 
 /* =============================== */
@@ -718,7 +681,7 @@ input:checked + .slider:before {
 
 .right-panel .preset-buttons.tool-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas para iconos cuadrados */
+    grid-template-columns: repeat(4, 1fr); /* 4 columnas para aprovechar el nuevo ancho */
     gap: 3px; /* Pequeño espacio entre iconos */
     margin-top: 5px;
     padding-bottom: 8px; /* Espacio debajo de la cuadrícula */

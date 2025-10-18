@@ -39,12 +39,25 @@ function readConfigFromForm() {
 //  MANEJADORES DE EVENTOS
 // ========================================
 
-// Actualiza estilos cada vez que cambia un control del formulario
+// Actualiza estilos cada vez que cambia un control del formulario (con debounce)
 form.addEventListener('input', () => {
+    // Actualiza el valor numérico del slider en tiempo real
+    if (e.target.type === 'range') {
+        const valueDisplay = document.getElementById(`${e.target.id}-value`);
+        if (valueDisplay) {
+            let value = e.target.value;
+            if (e.target.step.includes('.')) { // Si es un flotante
+                value = parseFloat(value).toFixed(2);
+            }
+            valueDisplay.textContent = value;
+        }
+    }
+
+    // Usa debounce para no sobrecargar el renderizado de estilos
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
         readConfigFromForm();
-        updateTextDisplay(); // Asegura que los caracteres se actualicen si el texto cambia
+        updateTextDisplay(); // Recrea los spans si el texto cambia y aplica estilos
     }, 10); // Un pequeño delay para que la lectura del config sea consistente
 });
 
@@ -59,6 +72,20 @@ const randomBtn = document.getElementById('random-button');
 if (randomBtn) { // Asegurarse de que el botón existe antes de añadir el listener
     randomBtn.addEventListener('click', handleRandomize);
 }
+
+// Manejar la lógica del acordeón en el panel de controles
+const accordionItems = document.querySelectorAll('.accordion-item');
+accordionItems.forEach(item => {
+    const header = item.querySelector('.accordion-header');
+    header.addEventListener('click', () => {
+        // Cerrar todos los items
+        accordionItems.forEach(otherItem => {
+            if (otherItem !== item) otherItem.classList.remove('active');
+        });
+        // Abrir/cerrar el item actual
+        item.classList.toggle('active');
+    });
+});
 
 // ========================================
 //  INICIALIZACIÓN

@@ -25,16 +25,22 @@
         <div class="app-content-area">
             <!-- Sección de Controles (panel izquierdo) -->
             <section class="controls-container">
+                <div class="app-header">
+                    <h1>Generador 3D</h1>
+                    <p>Crea textos con estilo</p>
+                </div>
+
                 <!-- Formulario de Controles -->
                 <form id="controls-form" onsubmit="return false;">
                     <!-- Fieldset: Texto y Estilo -->
-                    <fieldset>
-                        <legend>A Texto y Estilo</legend>
+                    <fieldset class="accordion-item active">
+                        <legend class="accordion-header">Texto y Estilo</legend>
+                        <div class="accordion-content">
                         <div class="control-group text-input">
-                            <label for="title-text">
+                            <label for="text-input">
                                 <span>Texto</span>
                             </label>
-                            <input type="text" id="title-text" name="text" value="Dulce!">
+                            <input type="text" id="text-input" name="text" value="Dulce!">
                         </div>
 
                         <div class="control-group switch-group">
@@ -64,7 +70,7 @@
                         <div class="control-group">
                             <label for="letter-spacing">
                                 <span>Espaciado</span>
-                                <span class="value-display"><span id="letter-spacing-value">-0.25</span>rem</span>
+                                <span class="value-display"><span id="letter-spacing-value">-0.25</span><span data-unit="rem">rem</span></span>
                             </label>
                             <input type="range" id="letter-spacing" name="letterSpacing" min="-0.5" max="0.5"
                                 value="-0.25" step="0.01">
@@ -73,27 +79,29 @@
                         <div class="control-group">
                             <label for="outline-width">
                                 <span>Grosor de Borde</span>
-                                <span class="value-display"><span id="outline-width-value">2</span>px</span>
+                                <span class="value-display"><span id="outline-width-value">2</span><span data-unit="px">px</span></span>
                             </label>
                             <input type="range" id="outline-width" name="outlineWidth" min="0" max="10" value="2"
                                 step="0.5">
                         </div>
+                        </div>
                     </fieldset>
 
                     <!-- Fieldset: Sombra -->
-                    <fieldset>
-                        <legend>Sombra</legend>
+                    <fieldset class="accordion-item">
+                        <legend class="accordion-header">Sombra</legend>
+                        <div class="accordion-content">
                         <div class="control-group">
                             <label for="shadow-color">
                                 <span>Color de Sombra</span>
                             </label>
-                            <input type="color" id="shadow-color" name="shadowColor" value="#FFD700">
+                            <input type="color" id="shadow-color" name="shadowColor" value="#000000">
                         </div>
 
                         <div class="control-group">
                             <label for="shadow-length">
                                 <span>Longitud</span>
-                                <span class="value-display"><span id="shadow-length-value">0</span>px</span>
+                                <span class="value-display"><span id="shadow-length-value">0</span><span data-unit="px">px</span></span>
                             </label>
                             <input type="range" id="shadow-length" name="shadowLength" min="0" max="200" value="0">
                         </div>
@@ -101,7 +109,7 @@
                         <div class="control-group">
                             <label for="shadow-blur">
                                 <span>Desenfoque</span>
-                                <span class="value-display"><span id="shadow-blur-value">0</span>px</span>
+                                <span class="value-display"><span id="shadow-blur-value">0</span><span data-unit="px">px</span></span>
                             </label>
                             <input type="range" id="shadow-blur" name="shadowBlur" min="0" max="50" value="0"
                                 step="0.5">
@@ -111,7 +119,7 @@
                             <label for="start-angle">
                                 <span class="tooltip" data-tooltip="Ángulo de la sombra en la primera letra">Ángulo
                                     Inicial</span>
-                                <span class="value-display"><span id="start-angle-value">0</span>°</span>
+                                <span class="value-display"><span id="start-angle-value">0</span><span data-unit="°">°</span></span>
                             </label>
                             <input type="range" id="start-angle" name="startAngle" min="0" max="360" value="0">
                         </div>
@@ -120,19 +128,21 @@
                             <label for="end-angle">
                                 <span class="tooltip" data-tooltip="Ángulo de la sombra en la última letra">Ángulo
                                     Final</span>
-                                <span class="value-display"><span id="end-angle-value">0</span>°</span>
+                                <span class="value-display"><span id="end-angle-value">0</span><span data-unit="°">°</span></span>
                             </label>
                             <input type="range" id="end-angle" name="endAngle" min="0" max="360" value="0">
+                        </div>
                         </div>
                     </fieldset>
 
                     <!-- Fieldset: Efecto 3D -->
-                    <fieldset>
-                        <legend>Efecto 3D</legend>
+                    <fieldset class="accordion-item">
+                        <legend class="accordion-header">Efecto 3D</legend>
+                        <div class="accordion-content">
                         <div class="control-group">
                             <label for="perspective-arc">
                                 <span class="tooltip" data-tooltip="Crea un arco vertical con el texto">Curvatura</span>
-                                <span class="value-display"><span id="perspective-arc-value">0</span></span>
+                                <span class="value-display"><span id="perspective-arc-value">0</span><span data-unit=""></span></span>
                             </label>
                             <input type="range" id="perspective-arc" name="perspectiveArc" min="-150" max="150"
                                 value="0">
@@ -141,7 +151,7 @@
                         <div class="control-group">
                             <label for="perspective-rotate">
                                 <span class="tooltip" data-tooltip="Rota las letras hacia los lados">Rotación</span>
-                                <span class="value-display"><span id="perspective-rotate-value">0</span>°</span>
+                                <span class="value-display"><span id="perspective-rotate-value">0</span><span data-unit="°">°</span></span>
                             </label>
                             <input type="range" id="perspective-rotate" name="perspectiveRotate" min="-90" max="90"
                                 value="0">
@@ -152,15 +162,17 @@
                                 <span class="tooltip"
                                     data-tooltip="Aleja las letras de los extremos para dar profundidad">Intensidad
                                     3D</span>
-                                <span class="value-display"><span id="depth-intensity-value">7</span></span>
+                                <span class="value-display"><span id="depth-intensity-value">7</span><span data-unit=""></span></span>
                             </label>
                             <input type="range" id="depth-intensity" name="depthIntensity" min="1" max="20" value="7">
+                        </div>
                         </div>
                     </fieldset>
 
                     <!-- Fieldset: Efectos Especiales -->
-                    <fieldset>
-                        <legend>Efectos Especiales</legend>
+                    <fieldset class="accordion-item">
+                        <legend class="accordion-header">Efectos Especiales</legend>
+                        <div class="accordion-content">
                         <div class="control-group switch-group">
                             <label for="glow-effect">
                                 <span>Efecto de Resplandor</span>
@@ -184,9 +196,10 @@
                         <div class="control-group">
                             <label for="animation-speed">
                                 <span>Velocidad Animación</span>
-                                <span class="value-display"><span id="animation-speed-value">6</span>s</span>
+                                <span class="value-display"><span id="animation-speed-value">6</span><span data-unit="s">s</span></span>
                             </label>
                             <input type="range" id="animation-speed" name="animationSpeed" min="1" max="15" value="6">
+                        </div>
                         </div>
                     </fieldset>
 
@@ -221,25 +234,19 @@
             <section id="right-panel" class="right-panel">
                 <div class="panel-header">Marcador</div>
                 <div class="panel-content">
-                    <!-- Acciones "Seleccionar" y "Recortar" (pueden ser solo visuales si no hay funcionalidad) -->
-                    <div class="tool-actions-row">
-                        <button class="tool-action-btn"><i class="fas fa-mouse-pointer"></i> Seleccionar</button>
-                        <button class="tool-action-btn"><i class="fas fa-crop-alt"></i> Recortar</button>
-                    </div>
-
                     <!-- Fieldset con los botones de Preajustes (ahora como iconos de herramientas) -->
                     <fieldset class="presets-fieldset">
                         <legend>Herramientas</legend>
                         <div class="preset-buttons tool-grid">
-                            <button type="button" class="preset-btn" data-preset="deep"><i class="fas fa-mountain"></i></button>
-                            <button type="button" class="preset-btn" data-preset="neon"><i class="fas fa-lightbulb"></i></button>
-                            <button type="button" class="preset-btn" data-preset="elegant"><i class="fas fa-crown"></i></button>
-                            <button type="button" class="preset-btn" data-preset="bold"><i class="fas fa-bold"></i></button>
-                            <button type="button" class="preset-btn" data-preset="candy"><i class="fas fa-candy-cane"></i></button>
-                            <button type="button" class="preset-btn" data-preset="metal"><i class="fas fa-gem"></i></button>
-                            <button type="button" class="preset-btn" data-preset="retro"><i class="fas fa-video"></i></button>
-                            <button type="button" class="preset-btn" data-preset="galaxy"><i class="fas fa-star"></i></button>
-                            <button id="random-button" class="preset-btn"><i class="fas fa-random"></i></button>
+                            <button type="button" class="preset-btn" data-preset="deep" aria-label="Preajuste Profundo"><i class="fas fa-mountain"></i></button>
+                            <button type="button" class="preset-btn" data-preset="neon" aria-label="Preajuste Neón"><i class="fas fa-lightbulb"></i></button>
+                            <button type="button" class="preset-btn" data-preset="elegant" aria-label="Preajuste Elegante"><i class="fas fa-crown"></i></button>
+                            <button type="button" class="preset-btn" data-preset="bold" aria-label="Preajuste Negrita"><i class="fas fa-bold"></i></button>
+                            <button type="button" class="preset-btn" data-preset="candy" aria-label="Preajuste Caramelo"><i class="fas fa-candy-cane"></i></button>
+                            <button type="button" class="preset-btn" data-preset="metal" aria-label="Preajuste Metálico"><i class="fas fa-gem"></i></button>
+                            <button type="button" class="preset-btn" data-preset="retro" aria-label="Preajuste Retro"><i class="fas fa-video"></i></button>
+                            <button type="button" class="preset-btn" data-preset="galaxy" aria-label="Preajuste Galaxia"><i class="fas fa-star"></i></button>
+                            <button id="random-button" class="preset-btn" aria-label="Generar Aleatorio"><i class="fas fa-random"></i></button>
                         </div>
                     </fieldset>
 

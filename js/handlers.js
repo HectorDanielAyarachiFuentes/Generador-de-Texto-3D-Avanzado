@@ -1,5 +1,5 @@
-import { config, presets } from './config.js';
-import { form, copyBtn, resetBtn, randomBtn, presetButtons, bgButtons, copyMsg, demoContainer } from './dom.js';
+import { config, presets, initialConfig } from './config.js';
+import { form, presetButtons, bgButtons, copyMsg, demoContainer, textColorInput } from './dom.js';
 import { getRandom } from './utils.js';
 import { applyStyles, charSpans } from './effects.js';
 
@@ -24,18 +24,15 @@ export function updateFormFromConfig() {
             if (el.type === 'range') {
                 const valueDisplay = document.getElementById(`${el.id}-value`);
                 if (valueDisplay) {
-                    let value = el.value;
-                    // Añadir unidades si son necesarias
-                    if (el.id === 'animation-speed') value += 's';
-                    else if (el.id.includes('angle') || el.id === 'perspective-rotate') value += '°';
-                    else if (el.id.includes('width') || el.id.includes('length') || el.id.includes('blur') || el.id.includes('intensity') || el.id.includes('arc')) value += 'px';
+                    let value = config[key];
+                    if (typeof value === 'number' && !Number.isInteger(value)) {
+                        value = value.toFixed(2);
+                    }
                     valueDisplay.textContent = value;
                 }
             }
         }
     }
-    // Si el arcoíris está activado, desactiva el input de color de texto
-    const textColorInput = form.elements['textColor'];
     if (textColorInput) textColorInput.disabled = config.rainbowMode;
 }
 
@@ -177,7 +174,7 @@ export function generateAndCopyHtml() {
  * Restaura los controles a su estado inicial.
  */
 export function handleReset() {
-    Object.assign(config, { ...config.initialConfig }); // Copia los valores iniciales
+    Object.assign(config, { ...initialConfig }); // Copia los valores iniciales
     updateFormFromConfig(); // Actualiza los elementos del formulario
     applyStyles(); // Reaplica los estilos
 }
