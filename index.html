@@ -208,15 +208,7 @@
                     <!-- EL FIELDSET DE PRESETS SE MUEVE AL PANEL DERECHO -->
                 </form>
 
-                <!-- Botones de Acción (se quedan en el panel izquierdo) -->
-                <div class="actions">
-                    <button id="copy-css-button"><i class="fas fa-copy"></i> Copiar HTML Completo</button>
-                    <button id="export-png-button"><i class="fas fa-file-image"></i> Exportar como PNG</button>
-                    <button id="undo-button" disabled><i class="fas fa-undo"></i> Deshacer (Ctrl+Z)</button>
-                    <button id="redo-button" disabled><i class="fas fa-redo"></i> Rehacer (Ctrl+Y)</button>
-                    <button id="reset-button"><i class="fas fa-redo"></i> Restablecer Configuración</button>
-                    <div id="copy-message"></div>
-                </div>
+                <!-- Los botones de acción se han movido al panel derecho -->
             </section>
 
             <!-- Sección de Demostración (panel central) -->
@@ -254,6 +246,17 @@
                             <button id="random-button" class="preset-btn" aria-label="Generar Aleatorio"><i class="fas fa-random"></i></button>
                         </div>
                     </fieldset>
+
+                    <!-- Botones de Acción -->
+                    <div class="actions">
+                        <button id="copy-css-button"><i class="fas fa-copy"></i> Copiar HTML</button>
+                        <button id="export-png-button"><i class="fas fa-file-image"></i> Exportar PNG</button>
+                        <button id="undo-button" disabled><i class="fas fa-undo"></i> Deshacer</button>
+                        <button id="redo-button" disabled><i class="fas fa-redo"></i> Rehacer</button>
+                        <button id="reset-button"><i class="fas fa-redo"></i> Restablecer</button>
+                        <div id="copy-message"></div>
+                    </div>
+
 
                     <!-- Selector de Fondo (paleta de colores) movido aquí -->
                     <div class="color-palette-wrapper">

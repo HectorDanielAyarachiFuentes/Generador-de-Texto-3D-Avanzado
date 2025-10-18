@@ -477,12 +477,15 @@ input[type="text"]:focus {
 /* =============================== */
 /*          BOTONES DE ACCIÓN (Panel izquierdo)      */
 /* =============================== */
-.actions {
-    margin-top: 10px; /* Margen reducido */
+/* REUBICADO: Ahora en el panel derecho */
+.right-panel .actions {
+    margin-top: 8px; /* Margen reducido */
     text-align: center;
     display: flex;
     flex-direction: column;
     gap: 4px; /* Espacio reducido */
+    border-bottom: 1px solid var(--ms-paint-border-dark);
+    padding-bottom: 8px;
 }
 
 /* Estilos para todos los botones - Clásico botón 3D de Windows */
