@@ -1,5 +1,5 @@
 import { config, presets, initialConfig } from './config.js';
-import { form, presetButtons, bgButtons, copyMsg, demoContainer, textColorInput, shadowHost } from './dom.js';
+import { form, presetButtons, bgButtons, copyMsg, demoContainer, textColorInput } from './dom.js';
 import { getRandom } from './utils.js';
 import { applyStyles, charSpans } from './effects.js';
 import { pushState } from './history.js';
@@ -169,36 +169,6 @@ export function generateAndCopyHtml() {
         console.error('Fallo al copiar: ', err);
         copyMsg.classList.add('visible');
         setTimeout(() => copyMsg.classList.remove('visible'), 2000);
-    });
-}
-
-/**
- * Exporta el elemento de texto 3D como una imagen PNG.
- */
-export function handleExportToPng() {
-    const elementToCapture = shadowHost;
-    const originalBg = elementToCapture.style.backgroundColor;
-    
-    // Mensaje de procesando
-    copyMsg.textContent = 'Generando PNG...';
-    copyMsg.classList.add('visible');
-
-    html2canvas(elementToCapture, {
-        backgroundColor: null, // Fondo transparente
-        logging: false, // Desactiva los logs en la consola
-        useCORS: true, // Para fuentes externas si las hubiera
-        scale: 2 // Aumenta la resolución de la imagen final
-    }).then(canvas => {
-        const link = document.createElement('a');
-        link.download = 'texto-3d.png';
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        
-        copyMsg.textContent = '¡PNG descargado!';
-        setTimeout(() => copyMsg.classList.remove('visible'), 2000);
-    }).catch(err => {
-        copyMsg.textContent = 'Error al exportar.';
-        console.error('Fallo al exportar a PNG: ', err);
     });
 }
 
