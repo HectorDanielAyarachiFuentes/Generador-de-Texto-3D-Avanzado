@@ -3,10 +3,10 @@
 // ========================================
 
 import { config, presets, initialConfig } from './js/config.js'; 
-import { form, undoBtn, redoBtn, demoContainer, exportPngBtn } from './js/dom.js';
+import { form, undoBtn, redoBtn, demoContainer } from './js/dom.js';
 import { pushState, undo, redo, initHistory } from './js/history.js';
 import { updateTextDisplay, applyStyles } from './js/effects.js';
-import { updateFormFromConfig, generateAndCopyHtml, handleReset, handleRandomize, setupPresetButtons, setupBackgroundButtons, handleExportToPng } from './js/handlers.js';
+import { updateFormFromConfig, generateAndCopyHtml, handleReset, handleRandomize, setupPresetButtons, setupBackgroundButtons } from './js/handlers.js';
 import { createParticles } from './js/particles.js';
 import { saveStateToLocalStorage, loadStateFromLocalStorage } from './js/localstorage.js';
 
@@ -118,9 +118,6 @@ form.addEventListener('change', () => {
 
 // Manejar clic en botón de copiar
 document.getElementById('copy-css-button').addEventListener('click', generateAndCopyHtml);
-
-// Manejar clic en botón de exportar a PNG
-exportPngBtn.addEventListener('click', handleExportToPng);
 
 // Manejar clic en botón de reset
 document.getElementById('reset-button').addEventListener('click', handleReset);
