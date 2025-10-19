@@ -18,6 +18,7 @@ let debounceTimer; // Para controlar la frecuencia de actualización de estilos
 // ========================================
 let currentMoveableInstances = [];
 let editMode = 'word'; // 'word' or 'letter'
+config.transforms = { word: '', letters: [] }; // Objeto para guardar transformaciones
 
 /**
  * Lee los valores actuales de todos los controles del formulario
@@ -170,6 +171,11 @@ function switchEditMode(newMode) {
     document.getElementById('edit-mode-word').classList.toggle('active', newMode === 'word');
     document.getElementById('edit-mode-letter').classList.toggle('active', newMode === 'letter');
     
+    // Limpiar transformaciones al cambiar de modo para evitar conflictos
+    config.transforms.word = '';
+    config.transforms.letters = [];
+    updateTextDisplay(); // Redibuja para resetear las transformaciones visuales
+
     const demoContainer = document.getElementById('demo-container');
     demoContainer.classList.toggle('letter-edit-mode', newMode === 'letter');
 
@@ -223,6 +229,11 @@ function setupMoveable() {
         const target = document.getElementById('vanish-shadow');
         if (!target) return;
 
+        // Restaurar transformación guardada si existe
+        if (config.transforms.word) {
+            target.style.transform = config.transforms.word;
+        }
+
         target.style.position = 'absolute'; // Necesario para Moveable
 
         const moveable = new Moveable(container, {
@@ -232,13 +243,23 @@ function setupMoveable() {
 
         moveable.on("render", e => {
             e.target.style.transform = e.transform;
+            config.transforms.word = e.transform; // Guardar la transformación
+        });
+
+        // Guardar estado en el historial y localStorage al finalizar el gesto
+        moveable.on("dragEnd", () => pushState(config));
+        moveable.on("scaleEnd", () => pushState(config));
+        moveable.on("rotateEnd", () => pushState(config));
+
+        moveable.on(["drag", "scale", "rotate"], () => {
+             saveStateToLocalStorage(config); // Guardado en tiempo real
         });
 
         currentMoveableInstances.push(moveable);
 
     } else if (editMode === 'letter') {
         const letters = document.querySelectorAll('#vanish-shadow .char');
-        letters.forEach(letter => {
+        letters.forEach((letter, index) => {
             letter.style.position = 'relative'; // Necesario para Moveable
             letter.style.display = 'inline-block'; // Asegura que se pueda transformar
 
@@ -248,8 +269,22 @@ function setupMoveable() {
                 origin: false, // Mejora la experiencia de rotación para letras
             });
 
+            // Restaurar transformación guardada si existe
+            if (config.transforms.letters[index]) {
+                letter.style.transform = config.transforms.letters[index];
+            }
+
             moveable.on("render", e => {
                 e.target.style.transform = e.transform;
+                config.transforms.letters[index] = e.transform; // Guardar la transformación
+            });
+
+            // Guardar estado en el historial y localStorage al finalizar el gesto
+            moveable.on("dragEnd", () => pushState(config));
+            moveable.on("scaleEnd", () => pushState(config));
+            moveable.on("rotateEnd", () => pushState(config));
+            moveable.on(["drag", "scale", "rotate"], () => {
+                saveStateToLocalStorage(config); // Guardado en tiempo real
             });
 
             currentMoveableInstances.push(moveable);
