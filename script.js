@@ -174,3 +174,64 @@ document.addEventListener('DOMContentLoaded', () => {
     updateFormFromConfig(); // Carga los valores iniciales en el formulario
     updateTextDisplay(); // Muestra el texto inicial con sus estilos
 });
+
+
+
+// --- Añade este código al final de tu archivo script.js ---
+
+// 1. Selecciona el elemento que quieres mover y su contenedor.
+const targetToMove = document.getElementById('vanish-shadow');
+const containerForMoveable = document.getElementById('demo-container');
+
+// Para que los eventos de transformación funcionen correctamente,
+// el elemento no debe tener una posición estática.
+targetToMove.style.position = 'absolute';
+
+// 2. Crea una nueva instancia de Moveable.
+const moveable = new Moveable(containerForMoveable, {
+    target: targetToMove, // El elemento que se moverá
+    draggable: true,      // Habilita la funcionalidad de arrastrar
+    scalable: true,       // Habilita el escalado (cambio de tamaño proporcional)
+    rotatable: true,      // Habilita la rotación
+    
+    // Opciones para optimizar el rendimiento y la experiencia
+    throttleDrag: 1,      // Optimiza el rendimiento del arrastre
+    throttleScale: 0.01,
+    throttleRotate: 0.2,
+    
+    // Mantiene la relación de aspecto al escalar
+    keepRatio: true, 
+});
+
+/*
+ 3. Define los eventos para actualizar la propiedad 'transform' del elemento.
+    Es importante usar el evento 'render' que agrupa todas las transformaciones
+    (arrastrar, escalar, rotar) para evitar que se sobreescriban entre sí.
+*/
+moveable.on("render", e => {
+    e.target.style.transform = e.transform;
+});
+
+/*
+    Alternativa (menos recomendada si usas varias transformaciones):
+    Si solo quisieras manejar los eventos por separado, tendrías que hacerlo así
+    para que no interfieran entre ellos. El evento 'render' es más simple.
+
+moveable.on('drag', ({ target, transform }) => {
+    target.style.transform = transform;
+});
+
+moveable.on('scale', ({ target, transform }) => {
+    target.style.transform = transform;
+});
+
+moveable.on('rotate', ({ target, transform }) => {
+    target.style.transform = transform;
+});
+*/
+
+// 4. Para que el marco de Moveable se actualice si el texto cambia
+const observer = new MutationObserver(() => {
+    moveable.updateRect();
+});
+observer.observe(targetToMove, { childList: true, characterData: true, subtree: true });
