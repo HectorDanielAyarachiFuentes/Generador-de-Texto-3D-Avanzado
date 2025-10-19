@@ -1112,3 +1112,14 @@ input:checked + .slider:before {
     opacity: 1;
     visibility: visible;
 }
+
+
+
+/* Hide moveable controls in letter mode until hovered */
+.letter-edit-mode .moveable-control-box {
+    display: none;
+}
+.letter-edit-mode .char:hover + .moveable-control-box,
+.letter-edit-mode .moveable-control-box:hover {
+    display: block;
+}

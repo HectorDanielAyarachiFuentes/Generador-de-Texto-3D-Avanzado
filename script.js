@@ -13,6 +13,12 @@ import { saveStateToLocalStorage, loadStateFromLocalStorage } from './js/localst
 // Variables para la lógica del script
 let debounceTimer; // Para controlar la frecuencia de actualización de estilos
 
+// ========================================
+//  MOVEABLE.JS LOGIC
+// ========================================
+let currentMoveableInstances = [];
+let editMode = 'word'; // 'word' or 'letter'
+
 /**
  * Lee los valores actuales de todos los controles del formulario
  * y los guarda en el objeto 'config'.
@@ -96,6 +102,7 @@ form.addEventListener('input', (e) => {
     debounceTimer = setTimeout(() => {
         readConfigFromForm();
         updateTextDisplay(); // Recrea los spans si el texto cambia y aplica estilos
+        setupMoveable(); // Re-initialize moveable if text/chars change
         saveStateToLocalStorage(config); // Guarda el estado en tiempo real
     }, 10); // Un pequeño delay para que la lectura del config sea consistente
 });
@@ -152,6 +159,22 @@ accordionItems.forEach(item => {
     });
 });
 
+// Manejar cambio de modo de edición (Moveable.js)
+document.getElementById('edit-mode-word').addEventListener('click', () => switchEditMode('word'));
+document.getElementById('edit-mode-letter').addEventListener('click', () => switchEditMode('letter'));
+
+function switchEditMode(newMode) {
+    if (editMode === newMode) return;
+    editMode = newMode;
+
+    document.getElementById('edit-mode-word').classList.toggle('active', newMode === 'word');
+    document.getElementById('edit-mode-letter').classList.toggle('active', newMode === 'letter');
+    
+    const demoContainer = document.getElementById('demo-container');
+    demoContainer.classList.toggle('letter-edit-mode', newMode === 'letter');
+
+    setupMoveable();
+}
 // ========================================
 //  INICIALIZACIÓN
 // ========================================
@@ -173,65 +196,63 @@ document.addEventListener('DOMContentLoaded', () => {
     setupBackgroundButtons(); // Configura botones de fondo
     updateFormFromConfig(); // Carga los valores iniciales en el formulario
     updateTextDisplay(); // Muestra el texto inicial con sus estilos
+    setupMoveable(); // Configura Moveable.js por primera vez
 });
 
+/**
+ * Configura las instancias de Moveable.js según el modo de edición actual.
+ * Destruye las instancias antiguas y crea las nuevas.
+ */
+function setupMoveable() {
+    // 1. Destruir todas las instancias de Moveable existentes
+    currentMoveableInstances.forEach(instance => instance.destroy());
+    currentMoveableInstances = [];
 
+    const container = document.getElementById('demo-container');
+    const commonOptions = {
+        draggable: true,
+        scalable: true,
+        rotatable: true,
+        throttleDrag: 1,
+        throttleScale: 0.01,
+        throttleRotate: 0.2,
+        keepRatio: true,
+    };
 
-// --- Añade este código al final de tu archivo script.js ---
+    if (editMode === 'word') {
+        const target = document.getElementById('vanish-shadow');
+        if (!target) return;
 
-// 1. Selecciona el elemento que quieres mover y su contenedor.
-const targetToMove = document.getElementById('vanish-shadow');
-const containerForMoveable = document.getElementById('demo-container');
+        target.style.position = 'absolute'; // Necesario para Moveable
 
-// Para que los eventos de transformación funcionen correctamente,
-// el elemento no debe tener una posición estática.
-targetToMove.style.position = 'absolute';
+        const moveable = new Moveable(container, {
+            ...commonOptions,
+            target: target,
+        });
 
-// 2. Crea una nueva instancia de Moveable.
-const moveable = new Moveable(containerForMoveable, {
-    target: targetToMove, // El elemento que se moverá
-    draggable: true,      // Habilita la funcionalidad de arrastrar
-    scalable: true,       // Habilita el escalado (cambio de tamaño proporcional)
-    rotatable: true,      // Habilita la rotación
-    
-    // Opciones para optimizar el rendimiento y la experiencia
-    throttleDrag: 1,      // Optimiza el rendimiento del arrastre
-    throttleScale: 0.01,
-    throttleRotate: 0.2,
-    
-    // Mantiene la relación de aspecto al escalar
-    keepRatio: true, 
-});
+        moveable.on("render", e => {
+            e.target.style.transform = e.transform;
+        });
 
-/*
- 3. Define los eventos para actualizar la propiedad 'transform' del elemento.
-    Es importante usar el evento 'render' que agrupa todas las transformaciones
-    (arrastrar, escalar, rotar) para evitar que se sobreescriban entre sí.
-*/
-moveable.on("render", e => {
-    e.target.style.transform = e.transform;
-});
+        currentMoveableInstances.push(moveable);
 
-/*
-    Alternativa (menos recomendada si usas varias transformaciones):
-    Si solo quisieras manejar los eventos por separado, tendrías que hacerlo así
-    para que no interfieran entre ellos. El evento 'render' es más simple.
+    } else if (editMode === 'letter') {
+        const letters = document.querySelectorAll('#vanish-shadow .char');
+        letters.forEach(letter => {
+            letter.style.position = 'relative'; // Necesario para Moveable
+            letter.style.display = 'inline-block'; // Asegura que se pueda transformar
 
-moveable.on('drag', ({ target, transform }) => {
-    target.style.transform = transform;
-});
+            const moveable = new Moveable(container, {
+                ...commonOptions,
+                target: letter,
+                origin: false, // Mejora la experiencia de rotación para letras
+            });
 
-moveable.on('scale', ({ target, transform }) => {
-    target.style.transform = transform;
-});
+            moveable.on("render", e => {
+                e.target.style.transform = e.transform;
+            });
 
-moveable.on('rotate', ({ target, transform }) => {
-    target.style.transform = transform;
-});
-*/
-
-// 4. Para que el marco de Moveable se actualice si el texto cambia
-const observer = new MutationObserver(() => {
-    moveable.updateRect();
-});
-observer.observe(targetToMove, { childList: true, characterData: true, subtree: true });
+            currentMoveableInstances.push(moveable);
+        });
+    }
+}
