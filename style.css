@@ -162,19 +162,29 @@ body {
 
 .app-header h1 {
     margin: 0 0 5px 0;
-    font-size: 1.5rem; /* Tamaño ajustado para el panel */
-    font-family: var(--text-font-family); /* Usa la fuente de texto principal */
+    font-size: 0.9em; /* Reducir aún más el tamaño de fuente para que quepa en una línea */
+    font-family: var(--text-font-family);
     -webkit-font-smoothing: none;
     font-smoothing: none;
-    display: flex; /* Necesario para los spans de caracteres */
+    display: flex;
     justify-content: center;
-    min-height: 30px; /* Evita saltos de layout mientras se carga */
+    align-items: center; /* Centrar verticalmente el texto */
+    min-height: 30px;
+    /* Quitar flex-wrap y forzar nowrap para mantener en una sola línea */
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    line-height: 1; /* Ajustar la altura de línea */
+    word-break: normal; /* Asegurar que no rompa palabras si no hay espacio */
+    text-align: center; /* Asegurar centrado */
+    letter-spacing: 0.01em; /* Ajustar el espaciado entre letras */
 }
 
 .app-header p {
     margin: 0;
     color: var(--ms-paint-text-secondary);
-    font-size: 0.75em;
+    font-size: 0.7em; /* Reducir ligeramente el tamaño del párrafo */
+    word-break: break-word;
+    text-align: center; /* Asegurar centrado */
 }
 
 .demo-container {
