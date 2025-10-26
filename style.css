@@ -343,11 +343,33 @@ legend {
     border: 1px solid;
     border-color: var(--ms-paint-border-dark) var(--ms-paint-border-light) var(--ms-paint-border-light) var(--ms-paint-border-dark);
     padding: 1px 4px; /* Padding muy reducido */
+    cursor: pointer; /* Indicar que es interactivo */
+}
+
+legend:hover {
+    background-color: var(--ms-paint-bg-medium);
+}
+
+/* Estilo visual para la leyenda activa (simulando "presionada") */
+fieldset.active > legend {
+    border-color: var(--ms-paint-border-dark) var(--ms-paint-border-light) var(--ms-paint-border-light) var(--ms-paint-border-dark); /* Borde hundido */
+    background-color: var(--ms-paint-bg-medium);
 }
 
 /* Ocultar iconos de legend para la UI de MS Paint */
 legend i {
     display: none;
+}
+
+/* Ocultar el contenido del acordeón por defecto */
+.accordion-content {
+    display: none;
+    padding-top: 5px; /* Espacio entre la leyenda y el contenido */
+}
+
+/* Mostrar el contenido del acordeón cuando el fieldset padre está activo */
+.accordion-item.active .accordion-content {
+    display: block;
 }
 
 .control-group {

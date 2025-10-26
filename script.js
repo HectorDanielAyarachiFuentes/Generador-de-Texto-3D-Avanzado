@@ -148,12 +148,23 @@ const accordionItems = document.querySelectorAll('.accordion-item');
 accordionItems.forEach(item => {
     const header = item.querySelector('.accordion-header');
     header.addEventListener('click', () => {
-        // Cerrar todos los items
+        // Cerrar todos los items y actualizar sus ARIA
         accordionItems.forEach(otherItem => {
-            if (otherItem !== item) otherItem.classList.remove('active');
+            if (otherItem !== item) {
+                otherItem.classList.remove('active');
+                const otherHeader = otherItem.querySelector('.accordion-header');
+                const otherContent = otherItem.querySelector('.accordion-content');
+                if (otherHeader) otherHeader.setAttribute('aria-expanded', 'false');
+                if (otherContent) otherContent.hidden = true;
+            }
         });
-        // Abrir/cerrar el item actual
+
+        // Abrir/cerrar el item actual y actualizar sus ARIA
         item.classList.toggle('active');
+        const isExpanded = item.classList.contains('active'); // Verifica el nuevo estado
+        header.setAttribute('aria-expanded', isExpanded.toString());
+        const content = item.querySelector('.accordion-content');
+        if (content) content.hidden = !isExpanded;
     });
 });
 
