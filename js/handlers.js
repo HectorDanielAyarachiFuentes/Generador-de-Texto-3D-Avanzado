@@ -54,7 +54,24 @@ export function generateAndCopyHtml() {
     }`;
     });
 
-    // Construye el HTML completo a copiar
+    const isRainbowMode = config.rainbowMode;
+    const floatAnimation = config.floatAnimation ? `
+        animation-name: float;
+        animation-duration: ${config.animationSpeed}s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+    ` : '';
+
+    const glowEffect = config.glowEffect ? `
+        text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+    ` : '';
+
+    const rainbowCharColor = isRainbowMode ? `color: hsl(calc(var(--char-index) * 57), 80%, 60%);` : '';
+    const rainbowCharAnimation = isRainbowMode ? `
+        animation: rainbow-pulse 3s infinite alternate;
+    ` : '';
+
     const htmlContent = `<!DOCTYPE html>
 <html lang="es">
 <head>
@@ -68,47 +85,42 @@ export function generateAndCopyHtml() {
         justify-content: center;
         align-items: center;
         min-height: 100vh;
-        background: ${demoContainer.style.background || 'linear-gradient(135deg, #1a1a2e, #2c3e50)'}; /* Usa el fondo actual o uno por defecto */
+        background: ${demoContainer.style.background || 'linear-gradient(135deg, #1a1a2e, #2c3e50)'};
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         overflow-x: hidden;
         margin: 0;
         padding: 20px;
         box-sizing: border-box;
-        color: #f0f8ff; /* Color de texto general */
+        color: #f0f8ff;
     }
 
     /* Estilos para el título 3D principal */
     .epic-title {
-        font-size: clamp(40px, 10vw, 120px); /* Tamaño de fuente responsive */
+        font-size: clamp(40px, 10vw, 120px);
         font-weight: 800;
         display: flex;
         justify-content: center;
-        flex-wrap: nowrap; /* Por defecto, no envuelve */
-        perspective: 500px; /* Profundidad para el efecto 3D */
-        color: ${config.rainbowMode ? 'transparent' : config.textColor}; /* Color base o transparente si es arcoíris */
-        -webkit-text-stroke: ${config.outlineWidth}px ${config.outlineColor}; /* Contorno */
-        letter-spacing: ${config.letterSpacing}rem; /* Espaciado entre letras */
-        animation-name: ${config.floatAnimation ? 'float' : 'none'};
-        animation-duration: ${config.floatAnimation ? `${config.animationSpeed}s` : ''};
-        animation-timing-function: ease-in-out;
-        animation-iteration-count: infinite;
-        animation-direction: alternate;
+        flex-wrap: nowrap;
+        perspective: 500px;
+        color: ${isRainbowMode ? 'transparent' : config.textColor};
+        -webkit-text-stroke: ${config.outlineWidth}px ${config.outlineColor};
+        text-stroke: ${config.outlineWidth}px ${config.outlineColor};
+        letter-spacing: ${config.letterSpacing}rem;
+        ${floatAnimation}
+        ${glowEffect}
     }
 
     /* Estilos para cada carácter individual */
     .epic-title .char {
         display: inline-block;
         position: relative;
-        transition: transform 0.3s ease; /* Transición para hover */
+        transition: transform 0.3s ease;
+        ${rainbowCharColor}
+        ${rainbowCharAnimation}
     }
 
     .epic-title .char:hover {
-        transform: translateY(-5px) scale(1.1) !important; /* Efecto al pasar el ratón */
-    }
-
-    /* Estilo para el efecto de resplandor */
-    .epic-title.glow {
-        text-shadow: 0 0 10px currentColor, 0 0 20px currentColor;
+        transform: translateY(-5px) scale(1.1); /* Removido !important */
     }
 
     /* Animación de flotación */
@@ -118,11 +130,6 @@ export function generateAndCopyHtml() {
     }
 
     /* Estilos para el modo arcoíris */
-    .epic-title.rainbow .char {
-        color: hsl(calc(var(--char-index) * 57), 80%, 60%) !important; /* Color dinámico */
-        animation: rainbow-pulse 3s infinite alternate;
-    }
-
     @keyframes rainbow-pulse {
         to { filter: brightness(1.2) hue-rotate(360deg); }
     }
@@ -131,22 +138,18 @@ export function generateAndCopyHtml() {
     ${charStyles}
 
     /* --- RESPONSIVE ADJUSTMENTS --- */
-    /* Para Tablets y Escritorios Pequeños */
     @media (max-width: 1200px) {
         .epic-title { font-size: clamp(35px, 8vw, 100px); }
     }
 
-    /* Para Tablets Pequeñas y Móviles Grandes */
     @media (max-width: 768px) {
         .epic-title {
-            flex-wrap: wrap; /* Permite que el texto se envuelva */
-            line-height: 1.1; /* Reduce el espacio entre líneas si se envuelve */
+            flex-wrap: wrap;
+            line-height: 1.1;
             font-size: clamp(30px, 10vw, 90px);
         }
-        /* Adaptar los estilos 3D si se envuelve puede ser complejo, pero el enfoque principal es la legibilidad */
     }
 
-    /* Para Móviles en vertical */
     @media (max-width: 480px) {
         .epic-title {
             font-size: clamp(25px, 12vw, 80px);
@@ -155,7 +158,7 @@ export function generateAndCopyHtml() {
 </style>
 </head>
 <body>
-<h1 class="epic-title ${config.rainbowMode ? 'rainbow' : ''}">${charSpans.map(span => span.outerHTML).join('')}</h1>
+<h1 class="epic-title ${isRainbowMode ? 'rainbow' : ''} ${config.glowEffect ? 'glow' : ''}">${charSpans.map(span => span.outerHTML).join('')}</h1>
 </body>
 </html>`;
 
