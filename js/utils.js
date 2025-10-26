@@ -27,35 +27,6 @@ export function getRandom(min, max) {
  * Actualiza los valores numéricos mostrados al lado de los sliders.
  */
 export function updateLabelValues(config) {
-    const letterSpacingValue = document.getElementById('letter-spacing-value');
-    if (letterSpacingValue) letterSpacingValue.textContent = config.letterSpacing.toFixed(2);
-
-    const outlineWidthValue = document.getElementById('outline-width-value');
-    if (outlineWidthValue) outlineWidthValue.textContent = config.outlineWidth;
-
-    const shadowLengthValue = document.getElementById('shadow-length-value');
-    if (shadowLengthValue) shadowLengthValue.textContent = config.shadowLength;
-
-    const shadowBlurValue = document.getElementById('shadow-blur-value');
-    if (shadowBlurValue) shadowBlurValue.textContent = config.shadowBlur;
-
-    const startAngleValue = document.getElementById('start-angle-value');
-    if (startAngleValue) startAngleValue.textContent = config.startAngle;
-
-    const endAngleValue = document.getElementById('end-angle-value');
-    if (endAngleValue) endAngleValue.textContent = config.endAngle;
-
-    const perspectiveArcValue = document.getElementById('perspective-arc-value');
-    if (perspectiveArcValue) perspectiveArcValue.textContent = config.perspectiveArc;
-
-    const perspectiveRotateValue = document.getElementById('perspective-rotate-value');
-    if (perspectiveRotateValue) perspectiveRotateValue.textContent = config.perspectiveRotate;
-
-    const depthIntensityValue = document.getElementById('depth-intensity-value');
-    if (depthIntensityValue) depthIntensityValue.textContent = config.depthIntensity;
-
-    const animationSpeedValue = document.getElementById('animation-speed-value');
-    if (animationSpeedValue) animationSpeedValue.textContent = config.animationSpeed;
     for (const key in config) {
         // Convierte camelCase (e.g., letterSpacing) a kebab-case (e.g., letter-spacing)
         const id = key.replace(/([A-Z])/g, "-$1").toLowerCase();
