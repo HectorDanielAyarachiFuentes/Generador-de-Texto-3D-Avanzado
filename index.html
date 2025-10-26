@@ -36,8 +36,8 @@
                 <form id="controls-form" onsubmit="return false;">
                     <!-- Fieldset: Texto y Estilo -->
                     <fieldset class="accordion-item active">
-                        <legend class="accordion-header"><i class="fas fa-pencil-alt"></i>Texto y Estilo</legend>
-                        <div class="accordion-content">
+                        <legend class="accordion-header" role="button" aria-expanded="true" aria-controls="text-style-content"><i class="fas fa-pencil-alt"></i>Texto y Estilo</legend>
+                        <div id="text-style-content" class="accordion-content">
                         <div class="control-group text-input">
                             <label for="text-input">
                                 <span><i class="fas fa-keyboard"></i>Texto</span>
@@ -49,16 +49,16 @@
                             <label for="rainbow-toggle">
                                 <span><i class="fas fa-rainbow"></i>Color Arcoíris</span>
                                 <div class="switch">
-                                    <input type="checkbox" id="rainbow-toggle" name="rainbowMode">
+                                    <input type="checkbox" id="rainbow-toggle" name="rainbowMode" role="switch" aria-checked="false">
                                     <span class="slider"></span>
                                 </div>
                             </label>
                         </div>
 <div class="control-group">
-    <label>Edit Mode:</label>
-    <div class="button-group">
-        <button id="edit-mode-word" class="button active" type="button">Word</button>
-        <button id="edit-mode-letter" class="button" type="button">Letters</button>
+    <label id="edit-mode-label">Edit Mode:</label>
+    <div class="button-group" role="radiogroup" aria-labelledby="edit-mode-label">
+        <button id="edit-mode-word" class="button active" type="button" role="radio" aria-checked="true">Word</button>
+        <button id="edit-mode-letter" class="button" type="button" role="radio" aria-checked="false">Letters</button>
     </div>
 </div>
 
@@ -79,27 +79,27 @@
                         <div class="control-group">
                             <label for="letter-spacing">
                                 <span><i class="fas fa-text-width"></i>Espaciado</span>
-                                <span class="value-display"><span id="letter-spacing-value">-0.25</span><span data-unit="rem">rem</span></span>
+                                <span class="value-display"><span id="letter-spacing-value"></span><span data-unit="rem">rem</span></span>
                             </label>
                             <input type="range" id="letter-spacing" name="letterSpacing" min="-0.5" max="0.5"
-                                value="-0.25" step="0.01">
+                                value="-0.25" step="0.01" aria-valuemin="-0.5" aria-valuemax="0.5" aria-valuenow="-0.25" aria-labelledby="letter-spacing">
                         </div>
 
                         <div class="control-group">
                             <label for="outline-width">
                                 <span><i class="fas fa-border-style"></i>Grosor de Borde</span>
-                                <span class="value-display"><span id="outline-width-value">2</span><span data-unit="px">px</span></span>
+                                <span class="value-display"><span id="outline-width-value"></span><span data-unit="px">px</span></span>
                             </label>
                             <input type="range" id="outline-width" name="outlineWidth" min="0" max="10" value="2"
-                                step="0.5">
+                                step="0.5" aria-valuemin="0" aria-valuemax="10" aria-valuenow="2" aria-labelledby="outline-width">
                         </div>
                         </div>
                     </fieldset>
 
                     <!-- Fieldset: Sombra -->
                     <fieldset class="accordion-item">
-                        <legend class="accordion-header"><i class="fas fa-layer-group"></i>Sombra</legend>
-                        <div class="accordion-content">
+                        <legend class="accordion-header" role="button" aria-expanded="false" aria-controls="shadow-content"><i class="fas fa-layer-group"></i>Sombra</legend>
+                        <div id="shadow-content" class="accordion-content" hidden>
                         <div class="control-group">
                             <label for="shadow-color">
                                 <span><i class="fas fa-fill-drip"></i>Color de Sombra</span>
@@ -110,60 +110,63 @@
                         <div class="control-group">
                             <label for="shadow-length">
                                 <span><i class="fas fa-ruler-horizontal"></i>Longitud</span>
-                                <span class="value-display"><span id="shadow-length-value">0</span><span data-unit="px">px</span></span>
+                                <span class="value-display"><span id="shadow-length-value"></span><span data-unit="px">px</span></span>
                             </label>
-                            <input type="range" id="shadow-length" name="shadowLength" min="0" max="200" value="0">
+                            <input type="range" id="shadow-length" name="shadowLength" min="0" max="200" value="0"
+                                aria-valuemin="0" aria-valuemax="200" aria-valuenow="0" aria-labelledby="shadow-length">
                         </div>
 
                         <div class="control-group">
                             <label for="shadow-blur">
                                 <span><i class="fas fa-eye-dropper"></i>Desenfoque</span>
-                                <span class="value-display"><span id="shadow-blur-value">0</span><span data-unit="px">px</span></span>
+                                <span class="value-display"><span id="shadow-blur-value"></span><span data-unit="px">px</span></span>
                             </label>
                             <input type="range" id="shadow-blur" name="shadowBlur" min="0" max="50" value="0"
-                                step="0.5">
+                                step="0.5" aria-valuemin="0" aria-valuemax="50" aria-valuenow="0" aria-labelledby="shadow-blur">
                         </div>
 
                         <div class="control-group">
                             <label for="start-angle">
                                 <span class="tooltip" data-tooltip="Ángulo de la sombra en la primera letra"><i class="fas fa-angle-double-right"></i>Ángulo
                                     Inicial</span>
-                                <span class="value-display"><span id="start-angle-value">0</span><span data-unit="°">°</span></span>
+                                <span class="value-display"><span id="start-angle-value"></span><span data-unit="°">°</span></span>
                             </label>
-                            <input type="range" id="start-angle" name="startAngle" min="0" max="360" value="0">
+                            <input type="range" id="start-angle" name="startAngle" min="0" max="360" value="0"
+                                aria-valuemin="0" aria-valuemax="360" aria-valuenow="0" aria-labelledby="start-angle">
                         </div>
 
                         <div class="control-group">
                             <label for="end-angle">
                                 <span class="tooltip" data-tooltip="Ángulo de la sombra en la última letra"><i class="fas fa-angle-double-left"></i>Ángulo
                                     Final</span>
-                                <span class="value-display"><span id="end-angle-value">0</span><span data-unit="°">°</span></span>
+                                <span class="value-display"><span id="end-angle-value"></span><span data-unit="°">°</span></span>
                             </label>
-                            <input type="range" id="end-angle" name="endAngle" min="0" max="360" value="0">
+                            <input type="range" id="end-angle" name="endAngle" min="0" max="360" value="0"
+                                aria-valuemin="0" aria-valuemax="360" aria-valuenow="0" aria-labelledby="end-angle">
                         </div>
                         </div>
                     </fieldset>
 
                     <!-- Fieldset: Efecto 3D -->
                     <fieldset class="accordion-item">
-                        <legend class="accordion-header"><i class="fas fa-cube"></i>Efecto 3D</legend>
-                        <div class="accordion-content">
+                        <legend class="accordion-header" role="button" aria-expanded="false" aria-controls="effect-3d-content"><i class="fas fa-cube"></i>Efecto 3D</legend>
+                        <div id="effect-3d-content" class="accordion-content" hidden>
                         <div class="control-group">
                             <label for="perspective-arc">
                                 <span class="tooltip" data-tooltip="Crea un arco vertical con el texto"><i class="fas fa-archway"></i>Curvatura</span>
-                                <span class="value-display"><span id="perspective-arc-value">0</span><span data-unit=""></span></span>
+                                <span class="value-display"><span id="perspective-arc-value"></span><span data-unit=""></span></span>
                             </label>
                             <input type="range" id="perspective-arc" name="perspectiveArc" min="-150" max="150"
-                                value="0">
+                                value="0" aria-valuemin="-150" aria-valuemax="150" aria-valuenow="0" aria-labelledby="perspective-arc">
                         </div>
 
                         <div class="control-group">
                             <label for="perspective-rotate">
                                 <span class="tooltip" data-tooltip="Rota las letras hacia los lados"><i class="fas fa-sync-alt"></i>Rotación</span>
-                                <span class="value-display"><span id="perspective-rotate-value">0</span><span data-unit="°">°</span></span>
+                                <span class="value-display"><span id="perspective-rotate-value"></span><span data-unit="°">°</span></span>
                             </label>
                             <input type="range" id="perspective-rotate" name="perspectiveRotate" min="-90" max="90"
-                                value="0">
+                                value="0" aria-valuemin="-90" aria-valuemax="90" aria-valuenow="0" aria-labelledby="perspective-rotate">
                         </div>
 
                         <div class="control-group">
@@ -171,22 +174,23 @@
                                 <span class="tooltip"
                                     data-tooltip="Aleja las letras de los extremos para dar profundidad"><i class="fas fa-compress-arrows-alt"></i>Intensidad
                                     3D</span>
-                                <span class="value-display"><span id="depth-intensity-value">7</span><span data-unit=""></span></span>
+                                <span class="value-display"><span id="depth-intensity-value"></span><span data-unit=""></span></span>
                             </label>
-                            <input type="range" id="depth-intensity" name="depthIntensity" min="1" max="20" value="7">
+                            <input type="range" id="depth-intensity" name="depthIntensity" min="1" max="20" value="7"
+                                aria-valuemin="1" aria-valuemax="20" aria-valuenow="7" aria-labelledby="depth-intensity">
                         </div>
                         </div>
                     </fieldset>
 
                     <!-- Fieldset: Efectos Especiales -->
                     <fieldset class="accordion-item">
-                        <legend class="accordion-header"><i class="fas fa-wand-magic-sparkles"></i>Efectos Especiales</legend>
-                        <div class="accordion-content">
+                        <legend class="accordion-header" role="button" aria-expanded="false" aria-controls="special-effects-content"><i class="fas fa-wand-magic-sparkles"></i>Efectos Especiales</legend>
+                        <div id="special-effects-content" class="accordion-content" hidden>
                         <div class="control-group switch-group">
                             <label for="glow-effect">
                                 <span><i class="fas fa-lightbulb"></i>Efecto de Resplandor</span>
                                 <div class="switch">
-                                    <input type="checkbox" id="glow-effect" name="glowEffect" checked>
+                                    <input type="checkbox" id="glow-effect" name="glowEffect" checked role="switch" aria-checked="true">
                                     <span class="slider"></span>
                                 </div>
                             </label>
@@ -196,7 +200,7 @@
                             <label for="float-animation">
                                 <span><i class="fas fa-feather-alt"></i>Animación Flotante</span>
                                 <div class="switch">
-                                    <input type="checkbox" id="float-animation" name="floatAnimation">
+                                    <input type="checkbox" id="float-animation" name="floatAnimation" role="switch" aria-checked="false">
                                     <span class="slider"></span>
                                 </div>
                             </label>
@@ -205,9 +209,10 @@
                         <div class="control-group">
                             <label for="animation-speed">
                                 <span><i class="fas fa-tachometer-alt"></i>Velocidad Animación</span>
-                                <span class="value-display"><span id="animation-speed-value">6</span><span data-unit="s">s</span></span>
+                                <span class="value-display"><span id="animation-speed-value"></span><span data-unit="s">s</span></span>
                             </label>
-                            <input type="range" id="animation-speed" name="animationSpeed" min="1" max="15" value="6">
+                            <input type="range" id="animation-speed" name="animationSpeed" min="1" max="15" value="6"
+                                aria-valuemin="1" aria-valuemax="15" aria-valuenow="6" aria-labelledby="animation-speed">
                         </div>
                         </div>
                     </fieldset>
@@ -223,11 +228,11 @@
                 <!-- El SELECTOR DE FONDO SE MUEVE AL PANEL DERECHO -->
                 <!-- El texto 3D -->
                 <div class="text-demo">
-                    <h1 id="vanish-shadow"></h1>
+                    <h1 id="vanish-shadow" aria-live="polite" aria-atomic="true"></h1>
                 </div>
 
                 <!-- Status Bar estilo MS Paint -->
-                <div class="ms-paint-status-bar">
+                <div class="ms-paint-status-bar" role="status">
                     <div class="ms-paint-status-item">100, 100</div>
                     <div class="ms-paint-status-item">400x300</div>
                     <div class="ms-paint-zoom-level">100%</div>
@@ -235,57 +240,57 @@
             </section>
 
             <!-- NUEVA SECCIÓN: Panel de Herramientas Derecho (simulando "Marcador") -->
-            <section id="right-panel" class="right-panel">
-                <div class="panel-header">Marcador</div>
+            <section id="right-panel" class="right-panel" aria-labelledby="panel-header-right">
+                <div class="panel-header" id="panel-header-right">Marcador</div>
                 <div class="panel-content">
                     <!-- Fieldset con los botones de Preajustes (ahora como iconos de herramientas) -->
                     <fieldset class="presets-fieldset">
                         <legend>Herramientas</legend>
                         <div class="preset-buttons tool-grid">
-                            <button type="button" class="preset-btn" data-preset="deep" aria-label="Preajuste Profundo"><i class="fas fa-mountain"></i></button>
-                            <button type="button" class="preset-btn" data-preset="neon" aria-label="Preajuste Neón"><i class="fas fa-lightbulb"></i></button>
-                            <button type="button" class="preset-btn" data-preset="elegant" aria-label="Preajuste Elegante"><i class="fas fa-crown"></i></button>
-                            <button type="button" class="preset-btn" data-preset="bold" aria-label="Preajuste Negrita"><i class="fas fa-bold"></i></button>
-                            <button type="button" class="preset-btn" data-preset="candy" aria-label="Preajuste Caramelo"><i class="fas fa-candy-cane"></i></button>
-                            <button type="button" class="preset-btn" data-preset="metal" aria-label="Preajuste Metálico"><i class="fas fa-gem"></i></button>
-                            <button type="button" class="preset-btn" data-preset="retro" aria-label="Preajuste Retro"><i class="fas fa-video"></i></button>
-                            <button type="button" class="preset-btn" data-preset="galaxy" aria-label="Preajuste Galaxia"><i class="fas fa-star"></i></button>
-                            <button id="random-button" class="preset-btn" aria-label="Generar Aleatorio"><i class="fas fa-random"></i></button>
+                            <button type="button" class="preset-btn" data-preset="deep" aria-label="Preajuste Profundo" role="button"><i class="fas fa-mountain"></i></button>
+                            <button type="button" class="preset-btn" data-preset="neon" aria-label="Preajuste Neón" role="button"><i class="fas fa-lightbulb"></i></button>
+                            <button type="button" class="preset-btn" data-preset="elegant" aria-label="Preajuste Elegante" role="button"><i class="fas fa-crown"></i></button>
+                            <button type="button" class="preset-btn" data-preset="bold" aria-label="Preajuste Negrita" role="button"><i class="fas fa-bold"></i></button>
+                            <button type="button" class="preset-btn" data-preset="candy" aria-label="Preajuste Caramelo" role="button"><i class="fas fa-candy-cane"></i></button>
+                            <button type="button" class="preset-btn" data-preset="metal" aria-label="Preajuste Metálico" role="button"><i class="fas fa-gem"></i></button>
+                            <button type="button" class="preset-btn" data-preset="retro" aria-label="Preajuste Retro" role="button"><i class="fas fa-video"></i></button>
+                            <button type="button" class="preset-btn" data-preset="galaxy" aria-label="Preajuste Galaxia" role="button"><i class="fas fa-star"></i></button>
+                            <button id="random-button" class="preset-btn" aria-label="Generar Aleatorio" role="button"><i class="fas fa-random"></i></button>
                         </div>
                     </fieldset>
 
                     <!-- Selector de Fondo (paleta de colores) movido aquí -->
-                    <div class="color-palette-wrapper">
+                    <div class="color-palette-wrapper" role="group" aria-label="Selector de color de fondo">
                          <div class="background-selector">
                             <!-- Colores sólidos para la paleta de MS Paint -->
-                            <div class="bg-btn tooltip active" style="background-color: #000000;" data-bg="#000000" data-tooltip="Negro #000000"></div>
-                            <div class="bg-btn tooltip" style="background-color: #808080;" data-bg="#808080" data-tooltip="Gris #808080"></div>
-                            <div class="bg-btn tooltip" style="background-color: #C0C0C0;" data-bg="#C0C0C0" data-tooltip="Plata #C0C0C0"></div>
-                            <div class="bg-btn tooltip" style="background-color: #FFFFFF;" data-bg="#FFFFFF" data-tooltip="Blanco #FFFFFF"></div>
-                            <div class="bg-btn tooltip" style="background-color: #800000;" data-bg="#800000" data-tooltip="Marrón #800000"></div>
-                            <div class="bg-btn tooltip" style="background-color: #008000;" data-bg="#008000" data-tooltip="Verde #008000"></div>
-                            <div class="bg-btn tooltip" style="background-color: #808000;" data-bg="#808000" data-tooltip="Oliva #808000"></div>
-                            <div class="bg-btn tooltip" style="background-color: #000080;" data-bg="#000080" data-tooltip="Azul Marino #000080"></div>
-                            <div class="bg-btn tooltip" style="background-color: #800080;" data-bg="#800080" data-tooltip="Púrpura #800080"></div>
-                            <div class="bg-btn tooltip" style="background-color: #008080;" data-bg="#008080" data-tooltip="Verde azulado #008080"></div>
-                            <div class="bg-btn tooltip" style="background-color: #C0C0C0;" data-bg="#C0C0C0" data-tooltip="Plata #C0C0C0"></div>
-                            <div class="bg-btn tooltip" style="background-color: #FF0000;" data-bg="#FF0000" data-tooltip="Rojo #FF0000"></div>
-                            <div class="bg-btn tooltip" style="background-color: #00FF00;" data-bg="#00FF00" data-tooltip="Lima #00FF00"></div>
-                            <div class="bg-btn tooltip" style="background-color: #FFFF00;" data-bg="#FFFF00" data-tooltip="Amarillo #FFFF00"></div>
-                            <div class="bg-btn tooltip" style="background-color: #0000FF;" data-bg="#0000FF" data-tooltip="Azul #0000FF"></div>
-                            <div class="bg-btn tooltip" style="background-color: #FF00FF;" data-bg="#FF00FF" data-tooltip="Fucsia #FF00FF"></div>
-                            <div class="bg-btn tooltip" style="background-color: #00FFFF;" data-bg="#00FFFF" data-tooltip="Cian #00FFFF"></div>
-                            <div class="bg-btn tooltip" style="background-color: #FFC0CB;" data-bg="#FFC0CB" data-tooltip="Rosa #FFC0CB"></div>
+                            <div class="bg-btn tooltip active" style="background-color: #000000;" data-bg="#000000" data-tooltip="Negro #000000" role="button" aria-pressed="true" aria-label="Fondo Negro"></div>
+                            <div class="bg-btn tooltip" style="background-color: #808080;" data-bg="#808080" data-tooltip="Gris #808080" role="button" aria-pressed="false" aria-label="Fondo Gris"></div>
+                            <div class="bg-btn tooltip" style="background-color: #C0C0C0;" data-bg="#C0C0C0" data-tooltip="Plata #C0C0C0" role="button" aria-pressed="false" aria-label="Fondo Plata"></div>
+                            <div class="bg-btn tooltip" style="background-color: #FFFFFF;" data-bg="#FFFFFF" data-tooltip="Blanco #FFFFFF" role="button" aria-pressed="false" aria-label="Fondo Blanco"></div>
+                            <div class="bg-btn tooltip" style="background-color: #800000;" data-bg="#800000" data-tooltip="Marrón #800000" role="button" aria-pressed="false" aria-label="Fondo Marrón"></div>
+                            <div class="bg-btn tooltip" style="background-color: #008000;" data-bg="#008000" data-tooltip="Verde #008000" role="button" aria-pressed="false" aria-label="Fondo Verde"></div>
+                            <div class="bg-btn tooltip" style="background-color: #808000;" data-bg="#808000" data-tooltip="Oliva #808000" role="button" aria-pressed="false" aria-label="Fondo Oliva"></div>
+                            <div class="bg-btn tooltip" style="background-color: #000080;" data-bg="#000080" data-tooltip="Azul Marino #000080" role="button" aria-pressed="false" aria-label="Fondo Azul Marino"></div>
+                            <div class="bg-btn tooltip" style="background-color: #800080;" data-bg="#800080" data-tooltip="Púrpura #800080" role="button" aria-pressed="false" aria-label="Fondo Púrpura"></div>
+                            <div class="bg-btn tooltip" style="background-color: #008080;" data-bg="#008080" data-tooltip="Verde azulado #008080" role="button" aria-pressed="false" aria-label="Fondo Verde Azulado"></div>
+                            <div class="bg-btn tooltip" style="background-color: #C0C0C0;" data-bg="#C0C0C0" data-tooltip="Plata #C0C0C0" role="button" aria-pressed="false" aria-label="Fondo Plata"></div>
+                            <div class="bg-btn tooltip" style="background-color: #FF0000;" data-bg="#FF0000" data-tooltip="Rojo #FF0000" role="button" aria-pressed="false" aria-label="Fondo Rojo"></div>
+                            <div class="bg-btn tooltip" style="background-color: #00FF00;" data-bg="#00FF00" data-tooltip="Lima #00FF00" role="button" aria-pressed="false" aria-label="Fondo Lima"></div>
+                            <div class="bg-btn tooltip" style="background-color: #FFFF00;" data-bg="#FFFF00" data-tooltip="Amarillo #FFFF00" role="button" aria-pressed="false" aria-label="Fondo Amarillo"></div>
+                            <div class="bg-btn tooltip" style="background-color: #0000FF;" data-bg="#0000FF" data-tooltip="Azul #0000FF" role="button" aria-pressed="false" aria-label="Fondo Azul"></div>
+                            <div class="bg-btn tooltip" style="background-color: #FF00FF;" data-bg="#FF00FF" data-tooltip="Fucsia #FF00FF" role="button" aria-pressed="false" aria-label="Fondo Fucsia"></div>
+                            <div class="bg-btn tooltip" style="background-color: #00FFFF;" data-bg="#00FFFF" data-tooltip="Cian #00FFFF" role="button" aria-pressed="false" aria-label="Fondo Cian"></div>
+                            <div class="bg-btn tooltip" style="background-color: #FFC0CB;" data-bg="#FFC0CB" data-tooltip="Rosa #FFC0CB" role="button" aria-pressed="false" aria-label="Fondo Rosa"></div>
                         </div>
                     </div>
 
                     <!-- Botones de Acción -->
                     <div class="actions">
-                        <button id="copy-css-button"><i class="fas fa-copy"></i> Copiar HTML</button>
-                        <button id="undo-button" disabled><i class="fas fa-undo"></i> Deshacer</button>
-                        <button id="redo-button" disabled><i class="fas fa-redo"></i> Rehacer</button>
-                        <button id="reset-button"><i class="fas fa-redo"></i> Restablecer</button>
-                        <div id="copy-message"></div>
+                        <button id="copy-css-button" role="button" aria-label="Copiar HTML de los estilos generados"><i class="fas fa-copy"></i> Copiar HTML</button>
+                        <button id="undo-button" disabled role="button" aria-label="Deshacer última acción"><i class="fas fa-undo"></i> Deshacer</button>
+                        <button id="redo-button" disabled role="button" aria-label="Rehacer última acción deshecha"><i class="fas fa-redo"></i> Rehacer</button>
+                        <button id="reset-button" role="button" aria-label="Restablecer todos los ajustes a los valores iniciales"><i class="fas fa-redo"></i> Restablecer</button>
+                        <div id="copy-message" role="status" aria-live="polite"></div>
                     </div>
 
                 </div>
